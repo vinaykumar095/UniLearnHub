@@ -123,7 +123,11 @@ export const login = async (req: ExpressRequest, res: ExpressResponse) => {
             }
         }
 
-        const token = signToken({ id: user._id, role: user.role, collegeId: user.collegeId });
+        const collegeIdToSign = user.collegeId && typeof user.collegeId === 'object' && '_id' in user.collegeId 
+            ? (user.collegeId as any)._id 
+            : user.collegeId;
+
+        const token = signToken({ id: user._id, role: user.role, collegeId: collegeIdToSign });
 
         // Log login activity
         const userAgent = req.headers['user-agent'] || '';

@@ -18,9 +18,11 @@ export const getUsers = async (req: ExpressRequest, res: ExpressResponse) => {
         const isCollegeAdmin = authReq.user?.role === Role.COLLEGE_ADMIN;
 
         if (isCollegeAdmin && authReq.user) {
-            // College Admins can see:
-            // 1. Students and Faculty from THEIR college
-            // 2. ALL Recruiters (as they are global entities)
+            // Extract string ID from collegeId (handle both string and object cases)
+            const adminCollegeId = authReq.user.collegeId && typeof authReq.user.collegeId === 'object' && '_id' in authReq.user.collegeId
+                ? (authReq.user.collegeId as any)._id.toString()
+                : authReq.user.collegeId?.toString();
+
             if (role === Role.RECRUITER) {
                 // College Admins can only see APPROVED recruiters
                 query.status = 'active';
@@ -28,7 +30,7 @@ export const getUsers = async (req: ExpressRequest, res: ExpressResponse) => {
                     query.collegeId = collegeId;
                 }
             } else {
-                query.collegeId = authReq.user.collegeId;
+                query.collegeId = adminCollegeId;
             }
         } else if (!isAdmin) {
             // Other roles (STUDENT, FACULTY) can only see users from their own college if searching
@@ -122,8 +124,15 @@ export const updateUserStatus = async (req: ExpressRequest, res: ExpressResponse
                 return res.status(403).json({ message: 'Recruiter approval is reserved for the Platform Administrator.' });
             }
 
-            const isSameCollege = userToUpdate.collegeId?.toString() === authReq.user?.collegeId?.toString();
-            if (!isSameCollege) {
+            const targetCollegeId = userToUpdate.collegeId?.toString();
+            const adminCollegeId = authReq.user?.collegeId && typeof authReq.user.collegeId === 'object' && '_id' in authReq.user.collegeId
+                ? (authReq.user.collegeId as any)._id.toString()
+                : authReq.user.collegeId?.toString();
+
+            console.log(`[updateUserStatus] Comparing - Target Institution: ${targetCollegeId}, Admin Institution: ${adminCollegeId}`);
+
+            if (targetCollegeId !== adminCollegeId) {
+                console.warn(`[updateUserStatus] Forbidden: Institution mismatch. Admin: ${adminCollegeId}, Target: ${targetCollegeId}`);
                 return res.status(403).json({ message: 'Not authorized to manage users from other institutions' });
             }
         }
