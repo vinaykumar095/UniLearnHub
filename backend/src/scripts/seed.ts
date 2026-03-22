@@ -80,6 +80,10 @@ const seed = async () => {
         // 8. Create Job (Global)
         await Job.create({
             title: 'Full Stack Developer',
+            company: 'Tech Corp',
+            location: 'Remote',
+            workMode: 'Remote',
+            jobType: 'Full-time',
             description: 'Looking for a skilled developer to join our core team.',
             recruiterId: recruiter._id,
             deadline: new Date('2026-12-31'),

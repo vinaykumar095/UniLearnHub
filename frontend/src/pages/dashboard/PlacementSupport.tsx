@@ -97,6 +97,28 @@ const PlacementSupport = () => {
     const [resDesc, setResDesc] = useState('');
     const [publishing, setPublishing] = useState(false);
     const [published, setPublished] = useState(false);
+    const [sharedItems, setSharedItems] = useState<string[]>([]);
+
+    const handleShareResource = async (title: string, category: string, url: string, desc: string = '') => {
+        const itemKey = `${title}-${url}`;
+        if (sharedItems.includes(itemKey)) return;
+        
+        try {
+            await api.post('/faculty/guidance', {
+                type: 'GENERAL_FEEDBACK',
+                content: `[Placement Resource: ${category}] ${title} — ${desc} | ${url}`,
+                studentId: null,
+                impacts: { dashboard: true, roadmap: false },
+                isBroadcast: true,
+            });
+            setSharedItems(prev => [...prev, itemKey]);
+            setTimeout(() => {
+                setSharedItems(prev => prev.filter(i => i !== itemKey));
+            }, 3000);
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
     const handlePublish = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -185,18 +207,26 @@ const PlacementSupport = () => {
                             const expanded = expandedCategory === section.category;
                             return (
                                 <div key={section.category} className="bg-white rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden">
-                                    {/* Card header */}
-                                    <button onClick={() => setExpandedCategory(expanded ? null : section.category)}
-                                        className="w-full flex items-center gap-5 p-8 text-left hover:bg-slate-50 transition-all group">
-                                        <div className={`w-14 h-14 ${section.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                                            <Icon className="w-6 h-6" />
-                                        </div>
-                                        <div className="flex-1">
-                                            <h3 className="text-xl font-black text-slate-900">{section.category}</h3>
-                                            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">{section.tips.length} tips · {section.resources.length} resources</p>
-                                        </div>
-                                        <ChevronRight className={`w-5 h-5 text-slate-400 transition-transform ${expanded ? 'rotate-90' : ''}`} />
-                                    </button>
+                                    <div className="flex items-center gap-5 p-8 group">
+                                        <button onClick={() => setExpandedCategory(expanded ? null : section.category)}
+                                            className="flex-1 flex items-center gap-5 text-left transition-all">
+                                            <div className={`w-14 h-14 ${section.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                                                <Icon className="w-6 h-6" />
+                                            </div>
+                                            <div className="flex-1">
+                                                <h3 className="text-xl font-black text-slate-900">{section.category}</h3>
+                                                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">{section.tips.length} tips · {section.resources.length} resources</p>
+                                            </div>
+                                            <ChevronRight className={`w-5 h-5 text-slate-400 transition-transform ${expanded ? 'rotate-90' : ''}`} />
+                                        </button>
+                                        
+                                        <button 
+                                            onClick={() => handleShareResource(`${section.category} Tips`, 'INTERVIEW', '#', section.tips.join('\n'))}
+                                            className={`px-4 py-2 rounded-xl border-2 text-[10px] font-black uppercase tracking-widest transition-all ${sharedItems.includes(`${section.category} Tips-#`) ? 'bg-emerald-500 border-emerald-500 text-white' : 'bg-slate-50 border-slate-100 text-slate-400 hover:border-emerald-500 hover:text-emerald-500'}`}
+                                        >
+                                            {sharedItems.includes(`${section.category} Tips-#`) ? 'Shared!' : 'Broadcast Tips'}
+                                        </button>
+                                    </div>
 
                                     <AnimatePresence>
                                         {expanded && (
@@ -215,14 +245,27 @@ const PlacementSupport = () => {
                                                 {/* Resources */}
                                                 <div className="px-8 pb-8 pt-4 border-t border-slate-50 space-y-3">
                                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Reference Links</p>
-                                                    {section.resources.map((r, i) => (
-                                                        <a key={i} href={r.url} target="_blank" rel="noopener noreferrer"
-                                                            className="flex items-center gap-3 p-4 bg-slate-900 text-white rounded-2xl hover:bg-indigo-600 transition-all group/link">
-                                                            <LinkIcon className="w-4 h-4 text-indigo-400 group-hover/link:text-white transition-colors" />
-                                                            <span className="text-sm font-bold">{r.label}</span>
-                                                            <ExternalLink className="w-3 h-3 ml-auto opacity-40" />
-                                                        </a>
-                                                    ))}
+                                                    {section.resources.map((r, i) => {
+                                                        const itemKey = `${r.label}-${r.url}`;
+                                                        const isShared = sharedItems.includes(itemKey);
+                                                        return (
+                                                            <div key={i} className="flex items-center gap-2 group/row">
+                                                                <a href={r.url} target="_blank" rel="noopener noreferrer"
+                                                                    className="flex-1 flex items-center gap-3 p-4 bg-slate-900 text-white rounded-2xl hover:bg-indigo-600 transition-all group/link">
+                                                                    <LinkIcon className="w-4 h-4 text-indigo-400 group-hover/link:text-white transition-colors" />
+                                                                    <span className="text-sm font-bold">{r.label}</span>
+                                                                    <ExternalLink className="w-3 h-3 ml-auto opacity-40" />
+                                                                </a>
+                                                                <button 
+                                                                    onClick={() => handleShareResource(r.label, 'INTERVIEW', r.url, `Curated resource for ${section.category}`)}
+                                                                    className={`p-4 rounded-2xl border-2 transition-all shrink-0 ${isShared ? 'bg-emerald-500 border-emerald-500 text-white' : 'bg-white border-slate-100 text-slate-400 hover:border-emerald-500 hover:text-emerald-500'}`}
+                                                                    title="Broadcast to Students"
+                                                                >
+                                                                    {isShared ? <CheckCircle2 className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+                                                                </button>
+                                                            </div>
+                                                        );
+                                                    })}
                                                 </div>
                                             </motion.div>
                                         )}
@@ -241,7 +284,7 @@ const PlacementSupport = () => {
                             {CODING_RESOURCES.map((res, i) => {
                                 const Icon = res.icon;
                                 return (
-                                    <motion.a key={res.label} href={res.url} target="_blank" rel="noopener noreferrer"
+                                    <motion.div key={res.label} 
                                         initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}
                                         whileHover={{ y: -4 }}
                                         className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8 flex flex-col gap-5 hover:shadow-xl transition-all group">
@@ -257,10 +300,20 @@ const PlacementSupport = () => {
                                             <h4 className="text-lg font-black text-slate-900 group-hover:text-indigo-600 transition-colors">{res.label}</h4>
                                             <p className="text-sm text-slate-500 font-medium mt-1 leading-relaxed">{res.desc}</p>
                                         </div>
-                                        <div className="flex items-center gap-2 text-xs font-black text-indigo-600 uppercase tracking-widest mt-auto">
-                                            Open Platform <ExternalLink className="w-3.5 h-3.5" />
+
+                                        <div className="flex items-center gap-2 mt-auto pt-4 border-t border-slate-50">
+                                            <a href={res.url} target="_blank" rel="noopener noreferrer"
+                                                className="flex items-center gap-2 text-xs font-black text-indigo-600 uppercase tracking-widest hover:text-indigo-800 transition-colors">
+                                                Open Platform <ExternalLink className="w-3.5 h-3.5" />
+                                            </a>
+                                            <button 
+                                                onClick={() => handleShareResource(res.label, 'CODING', res.url, res.desc)}
+                                                className={`ml-auto px-4 py-2 rounded-xl border-2 text-[10px] font-black uppercase tracking-widest transition-all ${sharedItems.includes(`${res.label}-${res.url}`) ? 'bg-emerald-500 border-emerald-500 text-white' : 'bg-white border-slate-100 text-slate-400 hover:border-emerald-500 hover:text-emerald-500'}`}
+                                            >
+                                                {sharedItems.includes(`${res.label}-${res.url}`) ? 'Shared!' : 'Broadcast'}
+                                            </button>
                                         </div>
-                                    </motion.a>
+                                    </motion.div>
                                 );
                             })}
                         </div>
@@ -302,34 +355,56 @@ const PlacementSupport = () => {
                         {/* Tips */}
                         <div className="lg:col-span-7 space-y-4">
                             <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-2">Expert Resume Tips</h3>
-                            {RESUME_TIPS.map((tip, i) => (
-                                <motion.div key={i} initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.06 }}
-                                    className="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 hover:shadow-lg hover:-translate-y-0.5 transition-all group">
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-8 h-8 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-xs font-black shrink-0 group-hover:bg-amber-500 group-hover:text-white transition-all">
-                                            {i + 1}
+                            {RESUME_TIPS.map((tip, i) => {
+                                const itemKey = `${tip.heading}-resume-tip`;
+                                const isShared = sharedItems.includes(itemKey);
+                                return (
+                                    <motion.div key={i} initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.06 }}
+                                        className="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-6 hover:shadow-lg hover:-translate-y-0.5 transition-all group">
+                                        <div className="flex items-start gap-4">
+                                            <div className="w-8 h-8 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-xs font-black shrink-0 group-hover:bg-amber-500 group-hover:text-white transition-all">
+                                                {i + 1}
+                                            </div>
+                                            <div className="flex-1">
+                                                <h4 className="font-black text-slate-900">{tip.heading}</h4>
+                                                <p className="text-sm text-slate-500 font-medium mt-1 leading-relaxed">{tip.body}</p>
+                                            </div>
+                                            <button 
+                                                onClick={() => handleShareResource(tip.heading, 'RESUME', '#', tip.body)}
+                                                className={`px-3 py-1.5 rounded-lg border text-[9px] font-black uppercase tracking-widest transition-all ${isShared ? 'bg-emerald-500 border-emerald-500 text-white' : 'bg-slate-50 border-slate-200 text-slate-400 hover:border-emerald-500 hover:text-emerald-500'}`}
+                                            >
+                                                {isShared ? 'Shared!' : 'Broadcast'}
+                                            </button>
                                         </div>
-                                        <div>
-                                            <h4 className="font-black text-slate-900">{tip.heading}</h4>
-                                            <p className="text-sm text-slate-500 font-medium mt-1 leading-relaxed">{tip.body}</p>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
+                                    </motion.div>
+                                );
+                            })}
+                                </div>
 
                         {/* Sidebar: Links + Checklist */}
                         <div className="lg:col-span-5 space-y-6">
                             <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8 space-y-4">
                                 <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Template & Tool Resources</h3>
-                                {RESUME_RESOURCES.map((r, i) => (
-                                    <a key={i} href={r.url} target="_blank" rel="noopener noreferrer"
-                                        className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl hover:bg-slate-900 hover:text-white transition-all group/link">
-                                        <LinkIcon className="w-4 h-4 text-slate-400 group-hover/link:text-indigo-400 transition-colors shrink-0" />
-                                        <span className="text-sm font-bold text-slate-700 group-hover/link:text-white transition-colors">{r.label}</span>
-                                        <ExternalLink className="w-3 h-3 ml-auto opacity-40" />
-                                    </a>
-                                ))}
+                                {RESUME_RESOURCES.map((r, i) => {
+                                    const itemKey = `${r.label}-${r.url}`;
+                                    const isShared = sharedItems.includes(itemKey);
+                                    return (
+                                        <div key={i} className="flex items-center gap-2">
+                                            <a href={r.url} target="_blank" rel="noopener noreferrer"
+                                                className="flex-1 flex items-center gap-3 p-4 bg-slate-50 rounded-2xl hover:bg-slate-900 hover:text-white transition-all group/link">
+                                                <LinkIcon className="w-4 h-4 text-slate-400 group-hover/link:text-indigo-400 transition-colors shrink-0" />
+                                                <span className="text-sm font-bold text-slate-700 group-hover/link:text-white transition-colors">{r.label}</span>
+                                                <ExternalLink className="w-3 h-3 ml-auto opacity-40" />
+                                            </a>
+                                            <button 
+                                                onClick={() => handleShareResource(r.label, 'RESUME', r.url, 'Professional Resume Resource')}
+                                                className={`p-4 rounded-2xl border-2 transition-all shrink-0 ${isShared ? 'bg-emerald-500 border-emerald-500 text-white' : 'bg-white border-slate-50 text-slate-400 hover:border-emerald-500 hover:text-emerald-500'}`}
+                                            >
+                                                {isShared ? <CheckCircle2 className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                                            </button>
+                                        </div>
+                                    );
+                                })}
                             </div>
 
                             {/* Resume Checklist */}

@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     CheckCircle2, Circle, Loader2,
     ExternalLink, Code, Database, Target, GraduationCap,
-    ChevronDown, Trophy, Rocket, Brain, Globe, Lock
+    ChevronDown, Trophy, Rocket, Brain, Globe, Lock,
+    Lightbulb, Award, TrendingUp
 } from 'lucide-react';
 import api from '../../api/client';
 
@@ -243,6 +244,7 @@ const goalMapping: Record<string, string[]> = {
 
 const CareerRoadmap = () => {
     const [roadmap, setRoadmap] = useState<any>(null);
+    const [guidances, setGuidances] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [creating, setCreating] = useState(false);
     const [togglingTitle, setTogglingTitle] = useState<string | null>(null);
@@ -261,8 +263,19 @@ const CareerRoadmap = () => {
 
     const loadRoadmap = async () => {
         try {
-            const res = await api.get('/career/roadmap');
-            if (res.data) setRoadmap(res.data);
+            const [rmRes, gdRes] = await Promise.all([
+                api.get('/career/roadmap'),
+                api.get('/career/guidance').catch(() => ({ data: [] }))
+            ]);
+            if (rmRes.data) setRoadmap(rmRes.data);
+            if (gdRes.data) {
+                // Filter only guidance meant for roadmap impact and relevant types
+                const roadmapGuidance = gdRes.data.filter((g: any) => 
+                    g.impacts?.roadmap && 
+                    ['CAREER_PATH', 'SKILL_RECOMMENDATION', 'LEARNING_MILESTONE', 'GENERAL_FEEDBACK'].includes(g.type)
+                );
+                setGuidances(roadmapGuidance);
+            }
         } catch (e) { console.error(e); }
         finally { setLoading(false); }
     };
@@ -432,6 +445,48 @@ const CareerRoadmap = () => {
                             </div>
                         </div>
                     </div>
+
+                    {/* Mentorship Guidance Box */}
+                    {guidances.length > 0 && (
+                        <div className="bg-indigo-900 rounded-[3rem] p-10 relative overflow-hidden shadow-2xl mt-8">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 blur-[100px] border-radius-full" />
+                            <div className="relative z-10">
+                                <h3 className="text-sm font-black text-indigo-300 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
+                                    <Lightbulb className="w-5 h-5" /> Faculty Mentorship Directives
+                                </h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {guidances.map((g) => {
+                                        const typeStyles = {
+                                            CAREER_PATH: { icon: TrendingUp, bg: 'bg-primary-500/20', text: 'text-primary-300', label: 'Career Path' },
+                                            SKILL_RECOMMENDATION: { icon: Award, bg: 'bg-emerald-500/20', text: 'text-emerald-300', label: 'Skill Focus' },
+                                            LEARNING_MILESTONE: { icon: Target, bg: 'bg-amber-500/20', text: 'text-amber-300', label: 'Milestone' },
+                                            GENERAL_FEEDBACK: { icon: Lightbulb, bg: 'bg-purple-500/20', text: 'text-purple-300', label: 'Feedback' },
+                                        }[g.type as string] || { icon: Lightbulb, bg: 'bg-slate-500/20', text: 'text-slate-300', label: 'Guidance' };
+                                        const Icon = typeStyles.icon;
+                                        
+                                        return (
+                                            <div key={g._id} className="bg-white/10 backdrop-blur-md rounded-[2rem] p-6 border border-white/10 hover:bg-white/15 transition-all">
+                                                <div className="flex items-start justify-between mb-4">
+                                                    <div className={`w-10 h-10 ${typeStyles.bg} rounded-xl flex items-center justify-center`}>
+                                                        <Icon className={`w-5 h-5 ${typeStyles.text}`} />
+                                                    </div>
+                                                    <span className={`px-3 py-1 bg-white/5 rounded-full text-[9px] font-black uppercase tracking-widest ${typeStyles.text}`}>
+                                                        {typeStyles.label}
+                                                    </span>
+                                                </div>
+                                                <div className="text-white text-sm font-bold leading-relaxed space-whitespace-pre-wrap whitespace-pre-wrap">
+                                                    {g.content}
+                                                </div>
+                                                <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
+                                                    <div className="text-xs font-black text-indigo-300">From: {g.facultyId?.name}</div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                    )}
 
                     {/* Stage Timeline */}
                     <div className="space-y-6">

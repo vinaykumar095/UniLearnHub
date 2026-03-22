@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import CareerRoadmap from '../models/CareerRoadmap';
+import Guidance from '../models/Guidance';
 
 export const getRoadmap = async (req: any, res: Response) => {
     try {
@@ -50,5 +51,17 @@ export const deleteRoadmap = async (req: any, res: Response) => {
         res.json({ message: 'Roadmap deleted successfully' });
     } catch (error) {
         res.status(500).json({ message: 'Error deleting roadmap', error });
+    }
+};
+
+export const getStudentGuidance = async (req: any, res: Response) => {
+    try {
+        const studentId = req.user.id;
+        const guidances = await Guidance.find({ studentId })
+            .populate('facultyId', 'name')
+            .sort({ createdAt: -1 });
+        res.json(guidances);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching student guidance', error });
     }
 };

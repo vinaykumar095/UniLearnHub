@@ -43,9 +43,16 @@ export const register = async (req: ExpressRequest, res: ExpressResponse) => {
             ? 'Registration successful! Your recruiter account is pending verification by the Platform Administrator.'
             : 'Registration successful! Your account is pending approval by your College/University admin.';
 
+        const populatedUser = await User.findById(user._id).populate('collegeId', 'name');
         res.status(201).json({
             message: successMessage,
-            user: { id: user._id, name: user.name, email: user.email, role: user.role, collegeId: user.collegeId },
+            user: { 
+                id: user._id, 
+                name: user.name, 
+                email: user.email, 
+                role: user.role, 
+                collegeId: populatedUser?.collegeId 
+            },
         });
 
         // Async notifications
@@ -78,7 +85,7 @@ export const login = async (req: ExpressRequest, res: ExpressResponse) => {
     try {
         const { email, password } = req.body;
 
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }).populate('collegeId', 'name');
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }

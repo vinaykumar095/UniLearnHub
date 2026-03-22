@@ -244,7 +244,7 @@ export const updateProfile = async (req: AuthRequest, res: ExpressResponse) => {
                 department, designation, qualification, experience, specialization, researchInterests, projects, avatar
             },
             { returnDocument: 'after' }
-        ).select('-password');
+        ).select('-password').populate('collegeId', 'name');
         res.json(user);
     } catch (error) {
         res.status(500).json({ message: 'Error updating profile', error });

@@ -135,11 +135,12 @@ export const provideGuidance = async (req: AuthRequest, res: ExpressResponse) =>
         else message = `Faculty Guidance: ${content}`;
 
         if (isBroadcast || !studentId) {
-            const facultyCourses = await Course.find({ facultyId });
-            const courseIds = facultyCourses.map(c => c._id);
-            const enrollments = await Enrollment.find({ courseId: { $in: courseIds } }).distinct('studentId');
+            // Find all users with role 'student' (case-insensitive check)
+            const students = await User.find({ 
+                role: { $regex: /^student$/i } 
+            }).distinct('_id');
             
-            for (const sid of enrollments) {
+            for (const sid of students) {
                 await Guidance.create({
                     facultyId,
                     studentId: sid,

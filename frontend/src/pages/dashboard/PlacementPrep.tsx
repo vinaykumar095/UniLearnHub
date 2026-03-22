@@ -4,7 +4,7 @@ import {
     Brain, Code, Loader2, ChevronRight,
     Timer, Award, AlertCircle, Play,
     MessageSquare, UserCheck, ShieldCheck, Zap,
-    FileSearch, Edit3, CheckCircle2, Circle
+    FileSearch, Edit3, CheckCircle2, Circle, Link2, Star, ExternalLink
 } from 'lucide-react';
 import api from '../../api/client';
 import CodingLab from '../../components/dashboard/CodingLab';
@@ -52,6 +52,7 @@ const PlacementPrep = () => {
     const [activeTab, setActiveTab] = useState<Tab>('aptitude');
     const [dsaProgress, setDsaProgress] = useState<string[]>([]);
     const [aptitudeProgress, setAptitudeProgress] = useState<string[]>([]);
+    const [guidances, setGuidances] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
     // Quiz State
@@ -82,12 +83,17 @@ const PlacementPrep = () => {
 
     const loadProgress = async () => {
         try {
-            const [dsaRes, aptitudeStatusRes] = await Promise.all([
+            const [dsaRes, aptitudeStatusRes, gdRes] = await Promise.all([
                 api.get('/dsa/progress'),
-                api.get('/placement/status')
+                api.get('/placement/status'),
+                api.get('/career/guidance').catch(() => ({ data: [] }))
             ]);
             setDsaProgress(dsaRes.data.solvedProblemIds || []);
             setAptitudeProgress(aptitudeStatusRes.data.completedTopicIds || []);
+            if (gdRes.data) {
+                const placementGuidance = gdRes.data.filter((g: any) => g.type === 'GENERAL_FEEDBACK');
+                setGuidances(placementGuidance);
+            }
         } catch (e) { console.error(e); }
         finally { setLoading(false); }
     };
@@ -382,6 +388,63 @@ const PlacementPrep = () => {
                             </div>
                         </div>
                     </div>
+
+                    {guidances.length > 0 && (
+                        <div className="bg-slate-900 rounded-[3rem] p-10 relative overflow-hidden shadow-2xl mb-8 mt-8 border border-white/5">
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-primary-600/10 blur-[120px] -translate-y-1/2 translate-x-1/2" />
+                            <div className="relative z-10">
+                                <h3 className="text-sm font-black text-primary-400 uppercase tracking-[0.3em] mb-10 flex items-center gap-3">
+                                    <Star className="w-5 h-5 fill-primary-400" /> Faculty Curated Resources
+                                </h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {guidances.map((g) => {
+                                        // Parse: [Placement Resource: CATEGORY] TITLE — DESC | URL
+                                        const match = g.content.match(/\[Placement Resource: (.*?)\] (.*?) — (.*?) \| (https?:\/\/.*)/);
+                                        const parsed = match ? {
+                                            category: match[1],
+                                            title: match[2],
+                                            desc: match[3],
+                                            url: match[4]
+                                        } : {
+                                            category: 'General',
+                                            title: g.content.split('|')[0],
+                                            desc: '',
+                                            url: g.content.includes('|') ? g.content.split('|')[1].trim() : '#'
+                                        };
+
+                                        return (
+                                            <div key={g._id} className="bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/10 hover:border-primary-500/50 transition-all group flex flex-col h-full">
+                                                <div className="flex items-start justify-between mb-6">
+                                                    <div className="w-12 h-12 bg-primary-500/10 rounded-2xl flex items-center justify-center border border-primary-500/20 group-hover:bg-primary-500 group-hover:text-white transition-all">
+                                                        <Link2 className="w-6 h-6 text-primary-400 group-hover:text-white" />
+                                                    </div>
+                                                    <span className="px-3 py-1 bg-white/5 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-400 border border-white/5">
+                                                        {parsed.category}
+                                                    </span>
+                                                </div>
+                                                <h4 className="text-xl font-black text-white mb-3 leading-tight group-hover:text-primary-400 transition-colors">
+                                                    {parsed.title}
+                                                </h4>
+                                                <p className="text-sm text-slate-400 font-medium leading-relaxed mb-8 flex-1">
+                                                    {parsed.desc}
+                                                </p>
+                                                <div className="space-y-4 pt-6 border-t border-white/5">
+                                                    <a href={parsed.url} target="_blank" rel="noopener noreferrer" 
+                                                        className="w-full bg-white text-slate-900 py-4 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-primary-500 hover:text-white transition-all shadow-xl">
+                                                        Access Resource <ExternalLink className="w-4 h-4" />
+                                                    </a>
+                                                    <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                                        <div className="w-1.5 h-1.5 rounded-full bg-primary-500" />
+                                                        Shared by Prof. {g.facultyId?.name || 'Faculty'}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                    )}
 
                     {/* Tab Navigation */}
                     <div className="flex p-2 bg-slate-100 rounded-3xl gap-2 sticky top-0 z-20 backdrop-blur-sm">
