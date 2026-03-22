@@ -147,6 +147,12 @@ const DashboardLayout = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const { user } = useAuth();
     const [unreadCount, setUnreadCount] = useState(0);
+    const location = useLocation();
+
+    useEffect(() => {
+        const main = document.getElementById('main-content');
+        if (main) main.scrollTo(0, 0);
+    }, [location.pathname]);
 
     useEffect(() => {
         if (!user) return;
@@ -199,7 +205,7 @@ const DashboardLayout = () => {
                     </div>
                 </header>
 
-                <main className="flex-1 overflow-y-auto p-8 flex flex-col bg-slate-50">
+                <main id="main-content" className="flex-1 overflow-y-auto p-8 flex flex-col bg-slate-50">
                     <div className="flex-1">
                         <Outlet />
                     </div>
