@@ -1,7 +1,7 @@
 
 import mongoose from 'mongoose';
-import Notification from './src/models/Notification';
-import User from './src/models/User';
+import Notification from '../models/Notification';
+import User from '../models/User';
 
 async function checkNotifications() {
     try {
