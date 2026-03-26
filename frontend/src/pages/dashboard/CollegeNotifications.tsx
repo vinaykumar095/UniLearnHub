@@ -55,12 +55,12 @@ const CollegeNotifications = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                {/* Composer */}
+                {}
                 <div className="lg:col-span-7">
                     <div className="bg-white rounded-[3rem] border border-slate-100 shadow-sm p-10 space-y-7">
                         <h2 className="text-xl font-black text-slate-900">Compose Announcement</h2>
 
-                        {/* Target Selection */}
+                        {}
                         <div className="space-y-3">
                             <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Send To</p>
                             <div className="grid grid-cols-3 gap-3">
@@ -78,7 +78,7 @@ const CollegeNotifications = () => {
                             <p className="text-[10px] font-medium text-slate-400">{TARGETS.find(t => t.id === target)?.desc}</p>
                         </div>
 
-                        {/* Category */}
+                        {}
                         <div className="space-y-2">
                             <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Category</p>
                             <div className="flex gap-2">
@@ -91,7 +91,7 @@ const CollegeNotifications = () => {
                             </div>
                         </div>
 
-                        {/* Message */}
+                        {}
                         <form onSubmit={handleSend} className="space-y-5">
                             <div className="space-y-2">
                                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Message</label>
@@ -100,7 +100,7 @@ const CollegeNotifications = () => {
                                     className="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:bg-white focus:border-violet-500 outline-none text-sm font-medium resize-none transition-all" />
                             </div>
 
-                            {/* Preview */}
+                            {}
                             {message && (
                                 <div className="bg-slate-50 rounded-2xl p-5 border-l-4 border-violet-500">
                                     <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">Preview</p>
@@ -117,7 +117,7 @@ const CollegeNotifications = () => {
                     </div>
                 </div>
 
-                {/* History */}
+                {}
                 <div className="lg:col-span-5 space-y-4">
                     <div className="flex items-center justify-between">
                         <h2 className="text-lg font-black text-slate-900 italic flex items-center gap-2">

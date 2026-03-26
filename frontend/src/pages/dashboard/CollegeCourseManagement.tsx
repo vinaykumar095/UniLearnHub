@@ -61,7 +61,7 @@ export const CollegeCourseManagement = () => {
 
     return (
         <div className="space-y-8 max-w-7xl mx-auto pb-20">
-            {/* Header */}
+            {}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="text-left">
                     <h1 className="text-3xl font-black text-slate-900 italic">Academic Catalog Control</h1>
@@ -92,7 +92,7 @@ export const CollegeCourseManagement = () => {
                 </motion.div>
             )}
 
-            {/* Search & Filters */}
+            {}
             <div className="relative group">
                 <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary-600 transition-colors" />
                 <input 
@@ -104,7 +104,7 @@ export const CollegeCourseManagement = () => {
                 />
             </div>
 
-            {/* Main Content Grid */}
+            {}
             {loading ? (
                 <div className="py-20 flex flex-col items-center justify-center">
                     <Loader2 className="w-10 h-10 animate-spin text-primary-600 mb-4" />
@@ -200,7 +200,7 @@ export const CollegeCourseManagement = () => {
                 </div>
             )}
 
-            {/* Detailed View Modal */}
+            {}
             <AnimatePresence>
                 {selectedCourse && (
                     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -277,4 +277,4 @@ export const CollegeCourseManagement = () => {
     );
 };
 
-// export default CollegeCourseManagement;
+

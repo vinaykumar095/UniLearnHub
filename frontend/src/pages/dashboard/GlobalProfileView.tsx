@@ -111,7 +111,7 @@ const GlobalProfileView = () => {
                 </div>
             </div>
 
-            {/* Header Card */}
+            {}
             <div className="bg-slate-900 rounded-[3.5rem] p-8 md:p-12 relative overflow-hidden shadow-2xl">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-primary-600/10 blur-[120px]" />
                 <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
@@ -152,7 +152,7 @@ const GlobalProfileView = () => {
                 </div>
             </div>
 
-            {/* Details Grid */}
+            {}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {infoItems.map((item, idx) => (
                     <div
@@ -172,7 +172,7 @@ const GlobalProfileView = () => {
                 ))}
             </div>
 
-            {/* Bio Section if exists */}
+            {}
             {profile.bio && (
                 <div className="p-10 bg-white rounded-[3.5rem] border border-slate-100 shadow-sm">
                     <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-3">

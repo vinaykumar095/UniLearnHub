@@ -11,37 +11,37 @@ export const getFacultyDashboard = async (req: AuthRequest, res: ExpressResponse
     try {
         const facultyId = req.user!.id;
 
-        // 1. Total Courses Created
+        
         const totalCourses = await Course.countDocuments({ facultyId });
 
-        // 2. Fetch Faculty Courses for aggregation
+        
         const facultyCourses = await Course.find({ facultyId });
         const courseIds = facultyCourses.map(c => c._id);
 
-        // 3. Students Enrolled (Unique students across all courses)
+        
         const enrollments = await Enrollment.find({ courseId: { $in: courseIds } });
         const uniqueStudents = new Set(enrollments.map(e => e.studentId.toString()));
         const totalStudents = uniqueStudents.size;
 
-        // 4. Recently Active Students (Approximated by submissions)
+        
         const assignments = await Assignment.find({ courseId: { $in: courseIds } });
         const assignmentIds = assignments.map(a => a._id);
         const recentSubmissions = await Submission.find({
             assignmentId: { $in: assignmentIds }
         }).sort({ createdAt: -1 }).limit(10).populate('studentId', 'name email branch year');
 
-        // 5. Faculty Notifications
+        
         const facultyNotifications = await Notification.find({ userId: facultyId })
             .sort({ createdAt: -1 })
             .limit(5);
 
-        // 6. Upcoming Deadlines
+        
         const upcomingDeadlines = await Assignment.find({
             courseId: { $in: courseIds },
             deadline: { $gt: new Date() }
         }).sort({ deadline: 1 }).limit(5).populate('courseId', 'title');
 
-        // 7. Course Progress Statistics
+        
         const progressStats = facultyCourses.map(course => {
             const courseEnrollments = enrollments.filter(e => e.courseId.toString() === course._id.toString());
             const avgProgress = courseEnrollments.length
@@ -58,7 +58,7 @@ export const getFacultyDashboard = async (req: AuthRequest, res: ExpressResponse
         res.json({
             totalCourses,
             totalStudents,
-            activeStudentsToday: recentSubmissions.length, // approximation
+            activeStudentsToday: recentSubmissions.length, 
             recentSubmissions: recentSubmissions.map(s => ({
                 id: s._id,
                 studentName: (s.studentId as any)?.name,
@@ -135,7 +135,7 @@ export const provideGuidance = async (req: AuthRequest, res: ExpressResponse) =>
         else message = `Faculty Guidance: ${content}`;
 
         if (isBroadcast || !studentId) {
-            // Find students belonging to the same college as the faculty
+            
             const collegeId = (req as any).user.collegeId;
             const students = await User.find({ 
                 role: { $regex: /^student$/i },

@@ -15,7 +15,7 @@ const OverallRecruiterManagement = () => {
     useEffect(() => {
         const fetchRecruiters = async () => {
             try {
-                // In a real app, this would be a platform-wide endpoint
+                
                 const response = await api.get('/users?role=RECRUITER');
                 setRecruiters(response.data);
             } catch (error) {
@@ -30,7 +30,7 @@ const OverallRecruiterManagement = () => {
     const updateStatus = async (id: string, status: string) => {
         try {
             await api.patch(`/users/${id}/status`, { status });
-            // Align local state with backend standardized values
+            
             const newStatus = status === 'approved' ? 'active' : status === 'rejected' ? 'suspended' : status;
             setRecruiters(recruiters.map(r => r._id === id ? { ...r, status: newStatus } : r));
         } catch (error) {

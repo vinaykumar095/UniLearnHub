@@ -69,9 +69,9 @@ const Login = () => {
 
     return (
         <div className="min-h-screen flex bg-white overflow-hidden">
-            {/* Left Side */}
+            {}
             <div className="w-full lg:w-[48%] flex flex-col justify-center p-8 md:p-12 lg:p-16 relative">
-                {/* Logo */}
+                {}
                 <div className="flex items-center gap-4 mb-12 transform scale-110 origin-left">
                     <div className="w-16 h-16 bg-primary-600 rounded-3xl flex items-center justify-center shadow-xl shadow-primary-200">
                         <GraduationCap className="w-10 h-10 text-white" />
@@ -82,7 +82,7 @@ const Login = () => {
                 <div className="max-w-md w-full mx-auto">
                     <AnimatePresence mode="wait">
 
-                        {/* ── STEP 1: SELECTION ── */}
+                        {}
                         {path === null && (
                             <motion.div key="selection" variants={formVariants} initial="hidden" animate="visible" exit="exit">
                                 <h1 className="text-4xl font-black text-slate-900 mb-2">Welcome Back</h1>

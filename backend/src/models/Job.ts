@@ -6,10 +6,10 @@ export interface IJob extends Document {
     company: string;
     companyLogo?: string;
     location: string;
-    jobType: string; // Full-time, Internship, etc.
-    workMode: string; // Remote, Onsite, Hybrid
+    jobType: string; 
+    workMode: string; 
     salary?: string;
-    experienceLevel: string; // Intern, Entry, Mid, Senior
+    experienceLevel: string; 
     skillsRequired: string[];
     recruiterId: mongoose.Types.ObjectId;
     colleges: mongoose.Types.ObjectId[];

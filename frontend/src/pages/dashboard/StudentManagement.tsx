@@ -44,11 +44,11 @@ const StudentManagement = () => {
             await api.post('/faculty/guidance', {
                 ...guidanceData,
                 studentId: selectedStudent.studentId,
-                courseId: selectedStudent.courseId // if applicable
+                courseId: selectedStudent.courseId 
             });
             setShowGuidance(false);
             setGuidanceData({ type: 'GENERAL_FEEDBACK', content: '', impacts: { dashboard: true, roadmap: true } });
-            // Maybe show a success toast here
+            
         } catch (error) {
             console.error('Error sending guidance:', error);
         } finally {
@@ -69,7 +69,7 @@ const StudentManagement = () => {
 
     return (
         <div className="space-y-8">
-            {/* Header section */}
+            {}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div className="text-left">
                     <h1 className="text-3xl font-black text-slate-900 italic">Student Management Hub</h1>
@@ -90,7 +90,7 @@ const StudentManagement = () => {
                 </div>
             </div>
 
-            {/* Main Content Table */}
+            {}
             <div className="bg-white rounded-[3.5rem] border border-slate-100 shadow-xl shadow-slate-100/50 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
@@ -193,7 +193,7 @@ const StudentManagement = () => {
                 )}
             </div>
 
-            {/* Portfolio View Modal */}
+            {}
             <AnimatePresence>
                 {showPortfolio && selectedStudent && (
                     <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-md">
@@ -313,7 +313,7 @@ const StudentManagement = () => {
                 )}
             </AnimatePresence>
 
-            {/* Guidance Deployment Modal */}
+            {}
             <AnimatePresence>
                 {showGuidance && selectedStudent && (
                     <div className="fixed inset-0 z-[110] flex items-center justify-center p-6 bg-slate-900/60 backdrop-blur-md">

@@ -38,7 +38,7 @@ const RecruiterAnnouncements = () => {
             setSent(true);
             setTimeout(() => setSent(false), 3500);
         } catch {
-            // Still update local history for UX
+            
             const newAnn = { id: Date.now(), category, message: message.trim(), date: new Date().toISOString(), recipientCount: 0 };
             setHistory([newAnn, ...history]);
             setMessage('');
@@ -54,7 +54,7 @@ const RecruiterAnnouncements = () => {
 
     return (
         <div className="max-w-6xl mx-auto space-y-8 pb-20">
-            {/* Header */}
+            {}
             <div className="flex items-center gap-5">
                 <div className="p-3 bg-indigo-600 rounded-2xl shadow-lg shadow-indigo-200">
                     <Megaphone className="w-7 h-7 text-white" />
@@ -66,11 +66,11 @@ const RecruiterAnnouncements = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                {/* Compose */}
+                {}
                 <div className="lg:col-span-7 space-y-5">
                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-1">New Announcement</p>
 
-                    {/* Category Picker */}
+                    {}
                     <div className="grid grid-cols-3 gap-3">
                         {CATEGORIES.map(cat => {
                             const Icon = cat.icon;
@@ -121,7 +121,7 @@ const RecruiterAnnouncements = () => {
                     </form>
                 </div>
 
-                {/* History */}
+                {}
                 <div className="lg:col-span-5 space-y-4">
                     <div className="flex items-center justify-between px-1">
                         <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Dispatch History</p>

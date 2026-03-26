@@ -35,7 +35,7 @@ const RecruiterDashboard = () => {
                 const jobList = jobsRes.data;
                 setJobs(jobList);
 
-                // Collect recent applications across all jobs (up to 5 total)
+                
                 const apps: any[] = [];
                 for (const job of jobList.slice(0, 4)) {
                     if (apps.length >= 5) break;
@@ -66,7 +66,7 @@ const RecruiterDashboard = () => {
 
     return (
         <div className="max-w-7xl mx-auto space-y-10 pb-20">
-            {/* Hero */}
+            {}
             <div className="bg-slate-900 rounded-[3rem] p-12 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600/20 blur-[100px]" />
                 <div className="relative z-10">
@@ -92,7 +92,7 @@ const RecruiterDashboard = () => {
                 </div>
             </div>
 
-            {/* Stats Strip */}
+            {}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
                 <StatCard icon={Briefcase} label="Total Postings" value={jobs.length} color="bg-indigo-50 text-indigo-600" delay={0.1} />
                 <StatCard icon={Zap} label="Active Listings" value={activeJobs.length} color="bg-emerald-50 text-emerald-600" delay={0.15} />
@@ -101,7 +101,7 @@ const RecruiterDashboard = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                {/* Job Posting Summary */}
+                {}
                 <div className="lg:col-span-7 space-y-4">
                     <div className="flex items-center justify-between px-1">
                         <h2 className="text-lg font-black text-slate-900 italic flex items-center gap-2">
@@ -129,7 +129,7 @@ const RecruiterDashboard = () => {
                                         </p>
                                     </div>
 
-                                    {/* Application count bar */}
+                                    {}
                                     <div className="text-center hidden md:block">
                                         <p className="text-xl font-black text-slate-900">{appCount}</p>
                                         <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Apps</p>
@@ -157,7 +157,7 @@ const RecruiterDashboard = () => {
                     </div>
                 </div>
 
-                {/* Recent Activity */}
+                {}
                 <div className="lg:col-span-5 space-y-4">
                     <div className="flex items-center justify-between px-1">
                         <h2 className="text-lg font-black text-slate-900 italic flex items-center gap-2">
@@ -202,7 +202,7 @@ const RecruiterDashboard = () => {
                 </div>
             </div>
 
-            {/* Quick Links */}
+            {}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
                     { label: 'Post Jobs', icon: Plus, path: '/dashboard/recruiter/jobs', color: 'bg-indigo-600 text-white' },

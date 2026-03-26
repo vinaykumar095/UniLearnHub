@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import api from '../../api/client';
 
-// ─── Category Definitions ────────────────────────────────────────────────────
+
 
 const CATEGORIES = [
     {
@@ -60,7 +60,7 @@ const CATEGORIES = [
 const CAT_META: Record<string, (typeof CATEGORIES)[0]> = {};
 CATEGORIES.forEach(c => { CAT_META[c.id] = c; });
 
-// ─── Component ────────────────────────────────────────────────────────────────
+
 
 const FacultyAnnouncements = () => {
     const [courses, setCourses] = useState<any[]>([]);
@@ -70,20 +70,20 @@ const FacultyAnnouncements = () => {
     const [sent, setSent] = useState(false);
     const [recipientCount, setRecipientCount] = useState<number | null>(null);
 
-    // Form state
+    
     const [category, setCategory] = useState('COURSE');
     const [courseId, setCourseId] = useState('ALL');
     const [message, setMessage] = useState('');
     const [showTemplates, setShowTemplates] = useState(false);
 
-    // History filter
+    
     const [filterCat, setFilterCat] = useState('ALL');
 
     useEffect(() => {
         const load = async () => {
             try {
                 const res = await api.get('/faculty/dashboard');
-                // Extract course list from faculty dashboard
+                
                 const courseList = res.data.progressStats || [];
                 setCourses(courseList);
             } catch (e) {
@@ -94,7 +94,7 @@ const FacultyAnnouncements = () => {
         };
         load();
 
-        // Load local history from sessionStorage if present
+        
         const saved = sessionStorage.getItem('faculty_announcements');
         if (saved) setAnnouncements(JSON.parse(saved));
     }, []);
@@ -132,7 +132,7 @@ const FacultyAnnouncements = () => {
             setTimeout(() => { setSent(false); setRecipientCount(null); }, 4000);
         } catch (error) {
             console.error('Error broadcasting announcement:', error);
-            // Still show local "sent" for UX continuity
+            
             const fallbackAnn = {
                 id: Date.now(), message: message.trim(), category, courseId,
                 courseName: courseId === 'ALL' ? 'All Students' : courseId,
@@ -171,7 +171,7 @@ const FacultyAnnouncements = () => {
     return (
         <div className="max-w-7xl mx-auto space-y-10 pb-20">
 
-            {/* ── Header ── */}
+            {}
             <div className="flex flex-col md:flex-row md:items-center gap-6 justify-between">
                 <div className="flex items-center gap-5">
                     <div className="p-3 bg-indigo-600 rounded-2xl shadow-lg shadow-indigo-200">

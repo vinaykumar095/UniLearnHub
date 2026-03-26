@@ -35,7 +35,7 @@ const CentralAdminLogin = () => {
 
     return (
         <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
-            {/* Subtle orbs */}
+            {}
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-600/10 blur-[120px] rounded-full" />
             <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-indigo-600/10 blur-[100px] rounded-full" />
 
@@ -44,7 +44,7 @@ const CentralAdminLogin = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 className="w-full max-w-md relative z-10"
             >
-                {/* Header */}
+                {}
                 <div className="flex flex-col items-center mb-10">
                     <div className="w-16 h-16 bg-primary-600/10 border border-primary-600/20 rounded-2xl flex items-center justify-center mb-4">
                         <ShieldCheck className="w-8 h-8 text-primary-400" />

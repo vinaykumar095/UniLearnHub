@@ -5,7 +5,7 @@ interface User {
     name: string;
     email: string;
     role: string;
-    collegeId?: { id: string, name: string } | any; // collegeId can be object or string
+    collegeId?: { id: string, name: string } | any; 
     company?: string;
     skills?: string[];
     twoFactorEnabled?: boolean;

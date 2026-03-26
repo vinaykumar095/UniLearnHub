@@ -17,7 +17,7 @@ const Courses = () => {
     const [search, setSearch] = useState('');
     const [activeCategory, setActiveCategory] = useState('All');
     const [activeLevel, setActiveLevel] = useState('All');
-    const [sortBy, setSortBy] = useState('createdAt'); // createdAt, enrollmentCount, rating
+    const [sortBy, setSortBy] = useState('createdAt'); 
     const [message, setMessage] = useState('');
     const [selectedCourse, setSelectedCourse] = useState<any>(null);
 
@@ -45,7 +45,7 @@ const Courses = () => {
             await api.post('/courses/enroll', { courseId });
             setEnrolledIds(prev => new Set([...prev, courseId]));
             setMessage('Successfully enrolled! 🎉');
-            // Refresh courses to update enrollment count
+            
             const coursesRes = await api.get('/courses');
             setCourses(coursesRes.data);
             setTimeout(() => setMessage(''), 3000);
@@ -83,7 +83,7 @@ const Courses = () => {
 
     return (
         <div className="space-y-8 max-w-7xl mx-auto pb-20">
-            {/* Header Section */}
+            {}
             <div className="bg-slate-900 rounded-[2.5rem] p-10 relative overflow-hidden shadow-2xl">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-primary-600/20 blur-[100px] -translate-y-1/2 translate-x-1/2" />
                 <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-600/10 blur-[80px] translate-y-1/2 -translate-x-1/2" />
@@ -110,7 +110,7 @@ const Courses = () => {
                 </div>
             </div>
 
-            {/* Messaging */}
+            {}
             <AnimatePresence>
                 {message && (
                     <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.8 }}
@@ -123,7 +123,7 @@ const Courses = () => {
                 )}
             </AnimatePresence>
 
-            {/* Advanced Filters & Search */}
+            {}
             <div className="space-y-6 sticky top-0 z-20 bg-slate-50/80 backdrop-blur-md py-4">
                 <div className="flex flex-col lg:flex-row gap-4">
                     <div className="relative flex-[2]">
@@ -167,7 +167,7 @@ const Courses = () => {
                 </div>
             </div>
 
-            {/* Course Grid */}
+            {}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredAndSorted.map((course, i) => {
                     const isEnrolled = enrolledIds.has(course.id?.toString() || course._id?.toString());
@@ -177,12 +177,12 @@ const Courses = () => {
                             onClick={() => setSelectedCourse(course)}
                             className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-primary-100/30 transition-all duration-500 group relative flex flex-col h-full cursor-pointer">
 
-                            {/* Card Image/Icon Area */}
+                            {}
                             <div className="h-48 bg-slate-50 flex items-center justify-center relative overflow-hidden rounded-t-[2.5rem]">
                                 <div className="absolute inset-0 bg-gradient-to-br from-primary-600/5 to-indigo-600/5 group-hover:opacity-100 transition-opacity duration-700" />
                                 <BookOpen className="w-16 h-16 text-slate-200 group-hover:scale-125 group-hover:text-primary-400 transition-all duration-700 ease-out" />
 
-                                {/* Top Badges */}
+                                {}
                                 <div className="absolute top-5 left-5">
                                     <span className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider border-2 shadow-sm ${getDifficultyColor(course.difficulty || 'Beginner')}`}>
                                         {course.difficulty || 'Beginner'}
@@ -205,7 +205,7 @@ const Courses = () => {
                                 </div>
                             </div>
 
-                            {/* Card Content */}
+                            {}
                             <div className="p-8 flex flex-col flex-1">
                                 <div className="mb-4 flex-1">
                                     <h3 className="font-black text-slate-900 text-xl leading-snug group-hover:text-primary-600 transition-colors line-clamp-2 min-h-[3.5rem] mb-2">{course.title}</h3>
@@ -214,7 +214,7 @@ const Courses = () => {
                                     </p>
                                 </div>
 
-                                {/* Metadata Grid */}
+                                {}
                                 <div className="grid grid-cols-2 gap-4 mb-6 pt-6 border-t border-slate-50">
                                     <div className="flex items-center gap-2 text-slate-500">
                                         <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
@@ -242,7 +242,7 @@ const Courses = () => {
                 })}
             </div>
 
-            {/* Course Detail Modal */}
+            {}
             <AnimatePresence>
                 {selectedCourse && (
                     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
@@ -258,7 +258,7 @@ const Courses = () => {
                                 <X className="w-6 h-6" />
                             </button>
 
-                            {/* Left Side: Overview */}
+                            {}
                             <div className="md:w-2/5 p-10 bg-slate-50 overflow-y-auto custom-scrollbar">
                                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-100 border border-primary-200 rounded-full text-primary-700 font-bold text-[10px] uppercase tracking-widest mb-6">
                                     {selectedCourse.category || 'Course Overview'}
@@ -310,7 +310,7 @@ const Courses = () => {
                                 </div>
                             </div>
 
-                            {/* Right Side: Details & Action */}
+                            {}
                             <div className="flex-1 p-10 overflow-y-auto custom-scrollbar flex flex-col">
                                 <section className="mb-10">
                                     <h4 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
@@ -390,7 +390,7 @@ const Courses = () => {
                 )}
             </AnimatePresence>
 
-            {/* Empty State */}
+            {}
             {filteredAndSorted.length === 0 && (
                 <div className="text-center py-32 bg-white rounded-[3rem] border-4 border-dashed border-slate-50">
                     <div className="w-24 h-24 bg-slate-50 rounded-[2rem] flex items-center justify-center mx-auto mb-6">

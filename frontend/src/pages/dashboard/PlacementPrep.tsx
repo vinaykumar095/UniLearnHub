@@ -55,7 +55,7 @@ const PlacementPrep = () => {
     const [guidances, setGuidances] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
-    // Quiz State
+    
     const [quizActive, setQuizActive] = useState(false);
     const [quizCategory, setQuizCategory] = useState<string | null>(null);
     const [currentQIndex, setCurrentQIndex] = useState(0);
@@ -75,7 +75,7 @@ const PlacementPrep = () => {
 
     useEffect(() => {
         loadProgress();
-        // Calculate total subtopics once
+        
         const total = Object.values(aptitudeTopics).reduce((acc, cat) => 
             acc + Object.keys(cat.subTopics).length, 0);
         setTotalAptitudeTopics(total);
@@ -98,7 +98,7 @@ const PlacementPrep = () => {
         finally { setLoading(false); }
     };
 
-    // Quiz Functions
+    
     const startQuiz = (category: string, subTopic?: string) => {
         setQuizCategory(category);
         setSelectedSubTopic(subTopic || null);
@@ -144,7 +144,7 @@ const PlacementPrep = () => {
                     score,
                     total: questions.length
                 }),
-                // Automatically mark as completed if it's a sub-topic quiz
+                
                 selectedSubTopic ? api.post('/placement/status/toggle', {
                     topicId: `${quizCategory}:${selectedSubTopic}`,
                     status: 'completed'
@@ -398,7 +398,7 @@ const PlacementPrep = () => {
                                 </h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                     {guidances.map((g) => {
-                                        // Parse: [Placement Resource: CATEGORY] TITLE — DESC | URL
+                                        
                                         const match = g.content.match(/\[Placement Resource: (.*?)\] (.*?) — (.*?) \| (https?:\/\/.*)/);
                                         const parsed = match ? {
                                             category: match[1],
@@ -446,7 +446,7 @@ const PlacementPrep = () => {
                         </div>
                     )}
 
-                    {/* Tab Navigation */}
+                    {}
                     <div className="flex p-2 bg-slate-100 rounded-3xl gap-2 sticky top-0 z-20 backdrop-blur-sm">
                         {(['aptitude', 'coding', 'mocks', 'resume'] as Tab[]).map((tab) => (
                             <button key={tab} onClick={() => setActiveTab(tab)}
@@ -463,7 +463,7 @@ const PlacementPrep = () => {
                     <AnimatePresence mode="wait">
                         <motion.div key={activeTab} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}>
 
-                            {/* Aptitude Tab */}
+                            {}
                             {activeTab === 'aptitude' && (
                                 <div className="space-y-8">
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -521,7 +521,7 @@ const PlacementPrep = () => {
                                 </div>
                             )}
 
-                            {/* Coding Tab */}
+                            {}
                             {activeTab === 'coding' && (
                                 <div className="bg-white rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden flex flex-col md:flex-row h-[800px]">
                                     <div className="md:w-80 bg-slate-50 border-r border-slate-100 p-8 overflow-y-auto custom-scrollbar">
@@ -605,7 +605,7 @@ const PlacementPrep = () => {
                                 </div>
                             )}
 
-                            {/* Mocks Tab */}
+                            {}
                             {activeTab === 'mocks' && (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div className="bg-white rounded-[3rem] border border-slate-100 p-10 shadow-sm relative overflow-hidden group">
@@ -687,7 +687,7 @@ const PlacementPrep = () => {
                                 </div>
                             )}
 
-                            {/* Resume Tab */}
+                            {}
                             {activeTab === 'resume' && (
                                 <div className="max-w-4xl mx-auto space-y-8">
                                     <div className="bg-gradient-to-br from-primary-600 to-indigo-700 rounded-[3rem] p-12 text-white shadow-2xl relative overflow-hidden">

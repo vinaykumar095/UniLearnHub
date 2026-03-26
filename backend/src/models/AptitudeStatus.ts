@@ -2,7 +2,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IAptitudeStatus extends Document {
     studentId: mongoose.Types.ObjectId;
-    topicId: string; // Format: "Category:Subtopic"
+    topicId: string; 
     status: 'completed' | 'not_started';
     updatedAt: Date;
 }
@@ -13,7 +13,7 @@ const AptitudeStatusSchema: Schema = new Schema({
     status: { type: String, enum: ['completed', 'not_started'], default: 'completed' }
 }, { timestamps: true });
 
-// Ensure a student can only have one record per topic
+
 AptitudeStatusSchema.index({ studentId: 1, topicId: 1 }, { unique: true });
 
 export default mongoose.model<IAptitudeStatus>('AptitudeStatus', AptitudeStatusSchema);

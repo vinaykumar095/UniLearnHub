@@ -67,7 +67,7 @@ const GlobalCollegeView = () => {
                 </div>
             </div>
 
-            {/* Header Hero */}
+            {}
             <div className="bg-slate-900 rounded-[4rem] p-10 md:p-16 relative overflow-hidden shadow-2xl">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-600/10 blur-[150px]" />
                 <div className="relative z-10">
@@ -101,7 +101,7 @@ const GlobalCollegeView = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Contact & Basics */}
+                {}
                 <div className="lg:col-span-1 space-y-6">
                     <div className="bg-white rounded-[2.5rem] border border-slate-100 p-8 shadow-sm">
                         <h3 className="text-xs font-black text-slate-900 uppercase tracking-widest mb-8 italic">Contact Directory</h3>
@@ -150,7 +150,7 @@ const GlobalCollegeView = () => {
                     </div>
                 </div>
 
-                {/* Institutional activity */}
+                {}
                 <div className="lg:col-span-2 space-y-6">
                     <div className="bg-white rounded-[3rem] border border-slate-100 p-10 shadow-sm min-h-[400px]">
                         <div className="flex items-center justify-between mb-10">

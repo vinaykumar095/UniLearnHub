@@ -77,9 +77,9 @@ const ForgotPassword = () => {
 
     return (
         <div className="min-h-screen flex bg-white overflow-hidden">
-            {/* Left Side */}
+            {}
             <div className="w-full lg:w-[48%] flex flex-col justify-center p-8 md:p-12 lg:p-16 relative">
-                {/* Logo */}
+                {}
                 <div className="flex items-center gap-4 mb-12 transform scale-110 origin-left">
                     <div className="w-16 h-16 bg-primary-600 rounded-3xl flex items-center justify-center shadow-xl shadow-primary-200">
                         <GraduationCap className="w-10 h-10 text-white" />
@@ -90,7 +90,7 @@ const ForgotPassword = () => {
                 <div className="max-w-md w-full mx-auto">
                     <AnimatePresence mode="wait">
 
-                        {/* ── STEP 1: EMAIL ── */}
+                        {}
                         {step === 'email' && (
                             <motion.div key="email-step" variants={formVariants} initial="hidden" animate="visible" exit="exit">
                                 <Link to="/login" className="flex items-center gap-2 text-slate-400 hover:text-slate-700 font-bold mb-8 group transition-colors">
@@ -193,7 +193,7 @@ const ForgotPassword = () => {
                             </motion.div>
                         )}
 
-                        {/* ── STEP 3: NEW PASSWORD ── */}
+                        {}
                         {step === 'newPassword' && (
                             <motion.div key="password-step" variants={formVariants} initial="hidden" animate="visible" exit="exit">
                                 <button onClick={() => { setStep('otp'); setError(''); }} className="flex items-center gap-2 text-slate-400 hover:text-slate-700 font-bold mb-8 group transition-colors">
@@ -252,7 +252,7 @@ const ForgotPassword = () => {
                             </motion.div>
                         )}
 
-                        {/* ── STEP 4: SUCCESS ── */}
+                        {}
                         {step === 'success' && (
                             <motion.div key="success-step" variants={formVariants} initial="hidden" animate="visible" exit="exit" className="text-center">
                                 <motion.div
@@ -280,7 +280,7 @@ const ForgotPassword = () => {
                 </div>
             </div>
 
-            {/* Right Side: Visual */}
+            {}
             <div className="hidden lg:block lg:w-[52%] relative overflow-hidden bg-slate-900">
                 <div className="absolute inset-0 bg-gradient-to-br from-amber-600/30 to-slate-900/90" />
                 <div className="absolute inset-0 flex flex-col justify-center items-center z-10 p-20">

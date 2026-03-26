@@ -63,7 +63,7 @@ const FacultyProfile = () => {
 
     return (
         <div className="max-w-5xl mx-auto space-y-10 pb-20 px-4">
-            {/* Header Card */}
+            {}
             <div className="bg-slate-900 rounded-[3.5rem] p-8 md:p-12 relative overflow-hidden shadow-2xl">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-primary-600/10 blur-[120px]" />
                 <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
@@ -117,7 +117,7 @@ const FacultyProfile = () => {
                 </div>
             </div>
 
-            {/* Content Grid */}
+            {}
             <AnimatePresence mode="wait">
                 <motion.div
                     key={isEditing ? 'editing' : 'viewing'}

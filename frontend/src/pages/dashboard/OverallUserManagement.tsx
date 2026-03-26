@@ -80,7 +80,7 @@ const Users = () => {
                 </div>
             </div>
 
-            {/* Role Filter Tabs */}
+            {}
             <div className="flex items-center space-x-1 bg-slate-100/50 p-1 rounded-2xl w-fit">
                 {roles.map((role) => (
                     <button

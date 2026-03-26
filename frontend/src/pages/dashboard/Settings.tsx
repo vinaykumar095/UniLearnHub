@@ -23,7 +23,7 @@ const Settings = () => {
     const [saving, setSaving] = useState(false);
     const [msg, setMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-    // Security States
+    
     const [pwForm, setPwForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
     const [showPw, setShowPw] = useState({ current: false, new: false, confirm: false });
 
@@ -112,7 +112,7 @@ const Settings = () => {
 
     return (
         <div className="max-w-6xl mx-auto space-y-8 pb-20">
-            {/* Header */}
+            {}
             <div className="bg-slate-900 rounded-[3rem] p-10 relative overflow-hidden shadow-2xl">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-primary-600/10 blur-[100px]" />
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -141,7 +141,7 @@ const Settings = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                {/* Sidebar Navigation */}
+                {}
                 <div className="lg:col-span-3 space-y-2">
                     {tabs.map((tab) => (
                         <button key={tab.id} onClick={() => setActiveTab(tab.id)}
@@ -151,11 +151,11 @@ const Settings = () => {
                     ))}
                 </div>
 
-                {/* Main Content Area */}
+                {}
                 <div className="lg:col-span-9">
                     <AnimatePresence mode="wait">
                         <motion.div key={activeTab} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.2 }}>
-                            {/* Profile Section */}
+                            {}
                             {activeTab === 'profile' && (
                                 <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm space-y-8">
                                     <div className="flex items-center justify-between">
@@ -240,10 +240,10 @@ const Settings = () => {
                                 </div>
                             )}
 
-                            {/* Security Section */}
+                            {}
                             {activeTab === 'security' && (
                                 <div className="space-y-8">
-                                    {/* 2FA Toggle */}
+                                    {}
                                     <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm flex items-center justify-between">
                                         <div className="flex gap-6 items-center">
                                             <div className="w-16 h-16 bg-primary-50 text-primary-600 rounded-[1.5rem] flex items-center justify-center">
@@ -260,7 +260,7 @@ const Settings = () => {
                                         </button>
                                     </div>
 
-                                    {/* Password Management */}
+                                    {}
                                     <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm space-y-8">
                                         <h3 className="text-xl font-black text-slate-900 flex items-center gap-2 mr-Auto">
                                             <History className="w-6 h-6 text-red-500" /> Change Password
@@ -301,7 +301,7 @@ const Settings = () => {
                                         </form>
                                     </div>
 
-                                    {/* Login Activity */}
+                                    {}
                                     <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm space-y-6">
                                         <h3 className="text-xl font-black text-slate-900 flex items-center gap-2">
                                             <ShieldCheck className="w-6 h-6 text-green-500" /> Recent Activity
@@ -326,7 +326,7 @@ const Settings = () => {
                                 </div>
                             )}
 
-                            {/* Notifications Section */}
+                            {}
                             {activeTab === 'notifications' && (
                                 <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm space-y-8">
                                     <div>
@@ -374,7 +374,7 @@ const Settings = () => {
                                 </div>
                             )}
 
-                            {/* Privacy Section */}
+                            {}
                             {activeTab === 'privacy' && (
                                 <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm space-y-8">
                                     <div>
@@ -408,7 +408,7 @@ const Settings = () => {
                                     </div>
                                 </div>
                             )}
-                            {/* Logout Section */}
+                            {}
                             {activeTab === 'logout' && (
                                 <div className="space-y-6">
                                     <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm space-y-8">
@@ -472,7 +472,7 @@ const Settings = () => {
                 </div>
             </div>
 
-            {/* Notification Toast */}
+            {}
             <AnimatePresence>
                 {msg && (
                     <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }}

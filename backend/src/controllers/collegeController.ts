@@ -4,7 +4,7 @@ import User, { Role } from '../models/User';
 import Course from '../models/Course';
 import bcrypt from 'bcrypt';
 
-// Public: any institution can self-register (starts as 'pending')
+
 export const registerCollege = async (req: Request, res: Response) => {
     try {
         const { name, location, email, phone, principal, website, adminName, password } = req.body;
@@ -18,10 +18,10 @@ export const registerCollege = async (req: Request, res: Response) => {
         const existingUser = await User.findOne({ email });
         if (existingUser) return res.status(400).json({ message: 'A user with this email already exists.' });
 
-        // 1. Create College (pending)
+        
         const college = await College.create({ name, location, email, phone, principal, website, status: 'pending' });
 
-        // 2. Create Admin User (active, but blocked by college status)
+        
         const hashedPassword = await bcrypt.hash(password, 10);
         await User.create({
             name: adminName,
@@ -37,7 +37,7 @@ export const registerCollege = async (req: Request, res: Response) => {
             college
         });
 
-        // Async notifications
+        
         (async () => {
             try {
                 const { createNotification } = require('./notificationController');
@@ -54,14 +54,14 @@ export const registerCollege = async (req: Request, res: Response) => {
     }
 };
 
-// Admin: approve or suspend a college
+
 export const approveCollege = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { status } = req.body; // 'active' | 'suspended' | 'pending' | 'deleted'
+        const { status } = req.body; 
         const college = await College.findByIdAndUpdate(id, { status }, { returnDocument: 'after' });
         
-        // Notify College Admin
+        
         if (college) {
             (async () => {
                 try {
@@ -182,11 +182,11 @@ export const deleteCollege = async (req: Request, res: Response) => {
         const courses = await Course.find({ collegeId: id });
         const courseIds = courses.map((c: any) => c._id);
 
-        // Hard delete users and courses
+        
         await User.deleteMany({ collegeId: id });
         await Course.deleteMany({ collegeId: id });
  
-        // Hard delete college
+        
         await College.findByIdAndDelete(id);
  
         console.log(`[deleteCollege] Hard-deleted college ${id} and all associated users/courses.`);

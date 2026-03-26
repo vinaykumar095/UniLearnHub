@@ -95,7 +95,7 @@ const AdminDashboard = () => {
 
         return (
             <div className="space-y-10 pb-20 max-w-7xl mx-auto">
-                {/* Welcome Header */}
+                {}
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                     className="bg-slate-900 rounded-[3.5rem] p-12 text-white relative overflow-hidden shadow-2xl">
                     <div className="absolute top-0 right-0 w-96 h-96 bg-primary-600/20 blur-[100px]" />
@@ -113,7 +113,7 @@ const AdminDashboard = () => {
                     </div>
                 </motion.div>
 
-                {/* Quick Stats */}
+                {}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {stats.map((s, i) => (
                         <Link key={i} to={s.link || '#'}>
@@ -123,7 +123,7 @@ const AdminDashboard = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {/* Action Center */}
+                    {}
                     <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
                         className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm relative overflow-hidden group">
                         <div className="flex items-center justify-between mb-8">
@@ -181,7 +181,7 @@ const AdminDashboard = () => {
                         </div>
                     </motion.div>
 
-                    {/* Secondary Metrics */}
+                    {}
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }}
                         className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm">
                         <div className="flex items-center justify-between mb-8">
@@ -253,7 +253,7 @@ const AdminDashboard = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Platform Velocity with Trend */}
+                    {}
                     <div className="lg:col-span-2 bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm relative overflow-hidden group">
                         <div className="flex items-center justify-between mb-8">
                             <h3 className="font-black text-slate-900 flex items-center gap-3 italic">
@@ -303,7 +303,7 @@ const AdminDashboard = () => {
                         </div>
                     </div>
 
-                    {/* Registration Activity Feed */}
+                    {}
                     <div className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm">
                         <div className="flex items-center justify-between mb-8">
                             <h3 className="font-black text-slate-900 flex items-center gap-3 italic">
@@ -344,7 +344,7 @@ const AdminDashboard = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {/* Institutional Pulse */}
+                    {}
                     <div className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm">
                         <div className="flex items-center justify-between mb-8">
                             <h3 className="font-black text-slate-900 flex items-center gap-3 italic">
@@ -380,7 +380,7 @@ const AdminDashboard = () => {
                         </div>
                     </div>
 
-                    {/* Quick Access Node */}
+                    {}
                     <div className="bg-gradient-to-br from-indigo-600 to-primary-900 rounded-[3rem] p-10 text-white relative overflow-hidden group shadow-xl">
                         <Building2 className="absolute -bottom-10 -right-10 w-48 h-48 opacity-10 group-hover:scale-125 transition-transform duration-700" />
                         <div className="relative z-10">

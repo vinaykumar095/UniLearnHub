@@ -12,7 +12,7 @@ export interface IApplication extends Document {
 const ApplicationSchema: Schema = new Schema({
     jobId: { type: Schema.Types.ObjectId, ref: 'Job', required: true },
     studentId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    status: { type: String, default: 'pending' }, // pending, shortlisted, rejected, accepted
+    status: { type: String, default: 'pending' }, 
     resumeUrl: { type: String },
     portfolioLink: { type: String },
     coverLetter: { type: String },

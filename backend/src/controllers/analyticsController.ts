@@ -11,7 +11,7 @@ export const getPlatformStats = async (req: Request, res: Response) => {
         const thirtyDaysAgo = new Date();
         thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
-        // Enrollment Velocity Calculation
+        
         const getVelocity = async (days: number) => {
             const start = new Date();
             start.setDate(start.getDate() - days);
@@ -28,7 +28,7 @@ export const getPlatformStats = async (req: Request, res: Response) => {
             yearly: await getVelocity(365)
         };
 
-        // Institutional Pulse (Branch distribution)
+        
         const branches = await User.aggregate([
             { 
                 $match: { 
@@ -47,7 +47,7 @@ export const getPlatformStats = async (req: Request, res: Response) => {
             percentage: totalStudents > 0 ? Math.round((b.count / totalStudents) * 100) : 0
         }));
 
-        // Aggregate Recruiter Trends (last 6 months)
+        
         const recruiterTrends = await Job.aggregate([
             { $match: { createdAt: { $gte: new Date(new Date().setMonth(new Date().getMonth() - 6)) } } },
             {
@@ -59,7 +59,7 @@ export const getPlatformStats = async (req: Request, res: Response) => {
             { $sort: { "_id": 1 } }
         ]);
 
-        // Registration Activity (latest 10 users)
+        
         const registrationActivity = await User.find({ status: { $ne: 'deleted' } })
             .sort({ createdAt: -1 })
             .limit(10)
@@ -87,7 +87,7 @@ export const getPlatformStats = async (req: Request, res: Response) => {
                 })
             },
             courses: await Course.countDocuments({ status: { $ne: 'deleted' } }),
-            jobs: await Job.countDocuments(), // Jobs don't have status yet, using count as is or check recruiter
+            jobs: await Job.countDocuments(), 
             placementDrives: await PlacementDrive.countDocuments({ status: { $ne: 'COMPLETED' } }),
             systemPulse: '99.9%',
             topInstitutions: await College.find({ status: 'active' }).limit(5).select('name location'),
@@ -98,7 +98,7 @@ export const getPlatformStats = async (req: Request, res: Response) => {
             aggregatedDate: now.toLocaleDateString()
         };
 
-        // Add user counts to top institutions
+        
         const topInstitutionsWithCounts = await Promise.all(stats.topInstitutions.map(async (c: any) => {
             const students = await User.countDocuments({ 
                 role: Role.STUDENT, 

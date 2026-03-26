@@ -10,7 +10,7 @@ export const register = async (req: ExpressRequest, res: ExpressResponse) => {
     try {
         const { name, email, password, role, collegeId, company } = req.body;
 
-        // Role-based access control for registration
+        
         const allowedRoles = ['STUDENT', 'FACULTY', 'RECRUITER'];
         if (!allowedRoles.includes(role)) {
             return res.status(403).json({ message: 'Unauthorized role registration. Please contact Central Admin.' });
@@ -23,7 +23,7 @@ export const register = async (req: ExpressRequest, res: ExpressResponse) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Recruiters are global entities; Students and Faculty are college-specific
+        
         const finalCollegeId = role === 'RECRUITER' ? undefined : collegeId;
         const userStatus = 'pending';
 
@@ -55,18 +55,18 @@ export const register = async (req: ExpressRequest, res: ExpressResponse) => {
             },
         });
 
-        // Async notifications
+        
         (async () => {
             try {
                 const { createNotification } = require('./notificationController');
                 if (role === 'STUDENT' || role === 'FACULTY') {
-                    // Notify College Admin
+                    
                     const collegeAdmins = await User.find({ collegeId, role: 'COLLEGE_ADMIN' }).select('_id');
                     for (const admin of collegeAdmins) {
                         await createNotification(admin._id, `New ${role.toLowerCase()} registration: ${name} (${email}) pending approval.`);
                     }
                 } else if (role === 'RECRUITER') {
-                    // Notify Central Admin
+                    
                     const centralAdmins = await User.find({ role: 'CENTRAL_ADMIN' }).select('_id');
                     for (const admin of centralAdmins) {
                         await createNotification(admin._id, `New recruiter registration: ${name} (${email}) pending approval.`);
@@ -113,7 +113,7 @@ export const login = async (req: ExpressRequest, res: ExpressResponse) => {
             return res.status(403).json({ message });
         }
 
-        // Block College Admin login if their college is not approved yet
+        
         if (user.role === 'COLLEGE_ADMIN' && user.collegeId) {
             const college = await College.findById(user.collegeId);
             if (!college || college.status !== 'active') {
@@ -129,7 +129,7 @@ export const login = async (req: ExpressRequest, res: ExpressResponse) => {
 
         const token = signToken({ id: user._id, role: user.role, collegeId: collegeIdToSign });
 
-        // Log login activity
+        
         const userAgent = req.headers['user-agent'] || '';
         const ip = req.ip || req.socket.remoteAddress || 'unknown';
 
@@ -185,7 +185,7 @@ export const forgotPassword = async (req: ExpressRequest, res: ExpressResponse) 
             return res.json({ message: 'If an account with that email exists, a reset code has been generated.' });
         }
 
-        // Generate 6-digit OTP
+        
         const otp = crypto.randomInt(100000, 999999).toString();
         const hashedOtp = await bcrypt.hash(otp, 10);
 
@@ -197,7 +197,7 @@ export const forgotPassword = async (req: ExpressRequest, res: ExpressResponse) 
 
         res.json({
             message: 'If an account with that email exists, a reset code has been generated.',
-            otp // DEV ONLY: remove in production
+            otp 
         });
     } catch (error) {
         res.status(500).json({ message: 'Error processing forgot password request', error });

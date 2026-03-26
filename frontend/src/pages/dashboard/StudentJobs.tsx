@@ -8,7 +8,7 @@ import {
 import { useAuth } from '../../context/AuthContext';
 import api from '../../api/client';
 
-// All 5 statuses the recruiter can set
+
 const STATUS_CFG: Record<string, { color: string; bg: string; icon: any; label: string }> = {
     pending: { color: 'text-amber-700', bg: 'bg-amber-50 border-amber-200', icon: Clock, label: 'Pending' },
     applied: { color: 'text-amber-700', bg: 'bg-amber-50 border-amber-200', icon: Clock, label: 'Pending' },
@@ -16,7 +16,7 @@ const STATUS_CFG: Record<string, { color: string; bg: string; icon: any; label: 
     interview: { color: 'text-blue-700', bg: 'bg-blue-50 border-blue-200', icon: Calendar, label: 'Interview Scheduled' },
     rejected: { color: 'text-red-700', bg: 'bg-red-50 border-red-200', icon: XCircle, label: 'Rejected' },
     hired: { color: 'text-amber-700', bg: 'bg-amber-50 border-amber-200', icon: Star, label: 'Hired 🎉' },
-    // legacy uppercase variants
+    
     PENDING: { color: 'text-amber-700', bg: 'bg-amber-50 border-amber-200', icon: Clock, label: 'Pending' },
     SHORTLISTED: { color: 'text-emerald-700', bg: 'bg-emerald-50 border-emerald-200', icon: CheckCircle2, label: 'Shortlisted' },
     REJECTED: { color: 'text-red-700', bg: 'bg-red-50 border-red-200', icon: XCircle, label: 'Rejected' },
@@ -99,13 +99,13 @@ const StudentJobs = () => {
 
     return (
         <div className="max-w-7xl mx-auto space-y-8 pb-20">
-            {/* Header */}
+            {}
             <div>
                 <h1 className="text-3xl font-black text-slate-900 italic">Job Career</h1>
                 <p className="text-slate-500 font-medium mt-1">Discover opportunities posted by recruiters and track your applications.</p>
             </div>
 
-            {/* Toast */}
+            {}
             <AnimatePresence>
                 {message && (
                     <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
@@ -115,7 +115,7 @@ const StudentJobs = () => {
                 )}
             </AnimatePresence>
 
-            {/* Tabs */}
+            {}
             <div className="flex gap-2 bg-slate-100 p-1.5 rounded-2xl w-fit">
                 {(['browse', 'drives', 'tracker'] as const).map(tab => (
                     <button key={tab} onClick={() => setActiveTab(tab)}
@@ -126,7 +126,7 @@ const StudentJobs = () => {
             </div>
             {activeTab === 'browse' ? (
                 <>
-                    {/* Search + Filters */}
+                    {}
                     <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 space-y-4">
                         <div className="relative">
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -161,7 +161,7 @@ const StudentJobs = () => {
                         </div>
                     </div>
 
-                    {/* Job Cards */}
+                    {}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                         {filtered.map((job, i) => {
                             const applied = appliedJobIds.has(job.id?.toString() || job._id?.toString());
@@ -172,7 +172,7 @@ const StudentJobs = () => {
                                 <motion.div key={job._id || job.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
                                     className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all overflow-hidden">
                                     <div className="p-7">
-                                        {/* Top row */}
+                                        {}
                                         <div className="flex items-start justify-between mb-5">
                                             <div className="flex items-center gap-4">
                                                 {job.companyLogo ? (
@@ -209,7 +209,7 @@ const StudentJobs = () => {
                                             </div>
                                         </div>
 
-                                        {/* Tags */}
+                                        {}
                                         <div className="flex flex-wrap gap-2 mb-4">
                                             {job.jobType && (
                                                 <span className="flex items-center gap-1 px-3 py-1 bg-indigo-50 rounded-full text-[9px] font-black text-indigo-600 uppercase tracking-widest">
@@ -233,12 +233,12 @@ const StudentJobs = () => {
                                             )}
                                         </div>
 
-                                        {/* Description */}
+                                        {}
                                         <p className={`text-sm text-slate-600 font-medium leading-relaxed mb-4 ${!isOpen ? 'line-clamp-2' : ''}`}>
                                             {job.description}
                                         </p>
 
-                                        {/* Eligibility + Deadline */}
+                                        {}
                                         <div className="flex flex-wrap gap-3 text-[10px] text-slate-400 font-bold mb-4">
                                             {job.eligibility && (
                                                 <span className="flex items-center gap-1.5">
@@ -253,7 +253,7 @@ const StudentJobs = () => {
                                             )}
                                         </div>
 
-                                        {/* Show more toggle */}
+                                        {}
                                         {job.requirements && (
                                             <button onClick={() => setExpandedJob(isOpen ? null : (job._id || job.id))}
                                                 className="flex items-center gap-1 text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4 hover:underline">
@@ -273,7 +273,7 @@ const StudentJobs = () => {
                                             )}
                                         </AnimatePresence>
 
-                                        {/* Apply Button */}
+                                        {}
                                         <button onClick={() => !applied && !expired && setShowApplyModal(job)}
                                             disabled={applied || expired || applyingId === (job._id || job.id)}
                                             className={`w-full py-4 rounded-2xl font-black text-sm flex items-center justify-center gap-2 transition-all uppercase tracking-widest ${applied
@@ -382,9 +382,9 @@ const StudentJobs = () => {
                     )}
                 </div>
             ) : (
-                /* Application Tracker */
+                
                 <div className="space-y-4">
-                    {/* Status summary strip */}
+                    {}
                     {myApplications.length > 0 && (
                         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-2">
                             {Object.entries({
@@ -451,7 +451,7 @@ const StudentJobs = () => {
                     )}
                 </div>
             )}
-            {/* Easy Apply Modal */}
+            {}
             <AnimatePresence>
                 {showApplyModal && (
                     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">

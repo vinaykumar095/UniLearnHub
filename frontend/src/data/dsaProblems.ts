@@ -161,7 +161,7 @@ export const dsaProblems: Record<string, DSAProblem[]> = {
                 cpp: "class Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        \n    }\n};",
                 python: "class Solution:\n    def twoSum(self, nums: List[int], target: int) -> List[int]:\n        ",
                 java: "class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        \n    }\n}",
-                javascript: "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number[]}\n */\nvar twoSum = function(nums, target) {\n    \n};"
+                javascript: "\nvar twoSum = function(nums, target) {\n    \n};"
             }
         },
         { 
@@ -182,7 +182,7 @@ export const dsaProblems: Record<string, DSAProblem[]> = {
                 cpp: "class Solution {\npublic:\n    int maxSubArray(vector<int>& nums) {\n        \n    }\n};",
                 python: "class Solution:\n    def maxSubArray(self, nums: List[int]) -> int:\n        ",
                 java: "class Solution {\n    public int maxSubArray(int[] nums) {\n        \n    }\n}",
-                javascript: "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar maxSubArray = function(nums) {\n    \n};"
+                javascript: "\nvar maxSubArray = function(nums) {\n    \n};"
             }
         },
         { 
@@ -308,7 +308,7 @@ export const dsaProblems: Record<string, DSAProblem[]> = {
                 cpp: "class Solution {\npublic:\n    void reverseString(vector<char>& s) {\n        \n    }\n};",
                 python: "class Solution:\n    def reverseString(self, s: List[str]) -> None:\n        ",
                 java: "class Solution {\n    public void reverseString(char[] s) {\n        \n    }\n}",
-                javascript: "/**\n * @param {character[]} s\n * @return {void} Do not return anything, modify s in-place instead.\n */\nvar reverseString = function(s) {\n    \n};"
+                javascript: "\nvar reverseString = function(s) {\n    \n};"
             }
         },
         { 
@@ -451,10 +451,10 @@ export const dsaProblems: Record<string, DSAProblem[]> = {
                 { input: { head: [1, 2] }, expected: [2, 1], label: "Small" }
             ],
             starterCode: {
-                cpp: "/**\n * Definition for singly-linked list.\n * struct ListNode {\n *     int val;\n *     ListNode *next;\n *     ListNode() : val(0), next(nullptr) {}\n *     ListNode(int x) : val(x), next(nullptr) {}\n *     ListNode(int x, ListNode *next) : val(x), next(next) {}\n * };\n */\nclass Solution {\npublic:\n    ListNode* reverseList(ListNode* head) {\n        \n    }\n};",
+                cpp: "\nclass Solution {\npublic:\n    ListNode* reverseList(ListNode* head) {\n        \n    }\n};",
                 python: "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:\n        ",
-                java: "/**\n * Definition for singly-linked list.\n * public class ListNode {\n *     int val;\n *     ListNode next;\n *     ListNode() {}\n *     ListNode(int val) { this.val = val; }\n *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }\n * }\n */\nclass Solution {\n    public ListNode reverseList(ListNode head) {\n        \n    }\n}",
-                javascript: "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} head\n * @return {ListNode}\n */\nvar reverseList = function(head) {\n    \n};"
+                java: "\nclass Solution {\n    public ListNode reverseList(ListNode head) {\n        \n    }\n}",
+                javascript: "\n\nvar reverseList = function(head) {\n    \n};"
             }
         },
         { 

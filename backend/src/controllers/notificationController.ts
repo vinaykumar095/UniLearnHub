@@ -10,9 +10,7 @@ export const createNotification = async (userId: any, message: string) => {
     }
 };
 
-/**
- * Notify students based on college or globally
- */
+
 export const notifyStudents = async (message: string, collegeId?: string) => {
     try {
         const query: any = { role: Role.STUDENT };
@@ -82,11 +80,11 @@ export const broadcastAnnouncement = async (req: any, res: Response) => {
         let studentIds: any[] = [];
 
         if (senderRole === 'RECRUITER') {
-            // Recruiter announcements go to ALL students
+            
             const allStudents = await User.find({ role: Role.STUDENT }).select('_id');
             studentIds = allStudents.map((s: any) => s._id);
         } else {
-            // Faculty: target by course enrollment
+            
             const { default: Course } = require('../models/Course');
             const { default: Enrollment } = require('../models/Enrollment');
 
@@ -118,7 +116,7 @@ export const broadcastAnnouncement = async (req: any, res: Response) => {
 };
 export const adminBroadcast = async (req: any, res: Response) => {
     try {
-        const { message, targetRoles } = req.body; // targetRoles is an array like ['STUDENT', 'FACULTY'] or ['ALL']
+        const { message, targetRoles } = req.body; 
 
         let query: any = {};
         if (targetRoles && !targetRoles.includes('ALL')) {

@@ -80,7 +80,7 @@ const CourseManagement = () => {
 
     return (
         <div className="space-y-10 pb-20 max-w-7xl mx-auto">
-            {/* 1. Course Header */}
+            {}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -114,7 +114,7 @@ const CourseManagement = () => {
                 </div>
             </motion.div>
 
-            {/* 2. Navigation Tabs */}
+            {}
             <div className="flex flex-wrap gap-4 p-2 bg-white rounded-[2rem] border border-slate-100 shadow-sm w-fit">
                 {[
                     { id: 'assignments', label: 'Assignments', icon: ListChecks },

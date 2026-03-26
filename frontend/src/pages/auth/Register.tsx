@@ -27,7 +27,7 @@ const Register = () => {
                 const response = await api.get('/colleges?status=active');
                 setColleges(response.data);
 
-                // Set Parul University as default if it exists
+                
                 const parul = response.data.find((c: any) => c.name.toLowerCase().includes('parul'));
                 if (parul) {
                     setFormData(prev => ({ ...prev, collegeId: parul._id }));
@@ -90,7 +90,7 @@ const Register = () => {
 
     return (
         <div className="min-h-screen flex bg-white overflow-hidden">
-            {/* Left Side: Form */}
+            {}
             <div className="w-full lg:w-[45%] flex flex-col justify-between p-8 md:p-12 lg:p-16 relative overflow-y-auto">
                 <Link to="/login" className="flex items-center gap-2 text-slate-500 hover:text-primary-600 transition-colors font-bold mb-8 group w-fit">
                     <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -190,7 +190,7 @@ const Register = () => {
                                 </motion.div>
                             )}
 
-                            {/* Role Selection Blocks */}
+                            {}
                             <div className="space-y-3">
                                 <label className="text-sm font-bold text-slate-700 ml-1">Select Your Role</label>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -218,7 +218,7 @@ const Register = () => {
                                 </div>
                             </div>
 
-                            {/* College Selection Grid */}
+                            {}
                             {formData.role !== 'RECRUITER' && (
                                 <div className="space-y-4 transition-all duration-500">
                                     <div className="flex items-center justify-between ml-1">
@@ -303,7 +303,7 @@ const Register = () => {
                 </div>
             </div>
 
-            {/* Right Side: Visual Image Section */}
+            {}
             <div className="hidden lg:block lg:w-[55%] relative overflow-hidden bg-slate-900">
                 <motion.div
                     initial={{ scale: 1.1, opacity: 0 }}

@@ -13,7 +13,7 @@ const seed = async () => {
         await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/unilearnhub');
         console.log('Connected to MongoDB for seeding...');
 
-        // Clear existing data
+        
         await College.deleteMany({});
         await User.deleteMany({});
         await Course.deleteMany({});
@@ -21,12 +21,12 @@ const seed = async () => {
 
         const hashedPassword = await bcrypt.hash('password123', 10);
 
-        // 1. Create Colleges
+        
         const mit = await College.create({ name: 'MIT Institute', location: 'Cambridge, MA' });
         const stanford = await College.create({ name: 'Stanford University', location: 'Stanford, CA' });
         const parul = await College.create({ name: 'Parul University', location: 'Vadodara, Gujarat' });
 
-        // 2. Create Central Admin
+        
         await User.create({
             name: 'Platform Admin',
             email: 'admin@unilearn.com',
@@ -34,7 +34,7 @@ const seed = async () => {
             role: Role.CENTRAL_ADMIN,
         });
 
-        // 3. Create College Admins
+        
         await User.create({
             name: 'MIT Admin',
             email: 'admin@mit.edu',
@@ -43,7 +43,7 @@ const seed = async () => {
             collegeId: mit._id,
         });
 
-        // 4. Create Faculty
+        
         const faculty = await User.create({
             name: 'Dr. Smith',
             email: 'smith@mit.edu',
@@ -52,7 +52,7 @@ const seed = async () => {
             collegeId: mit._id,
         });
 
-        // 5. Create Students
+        
         const student = await User.create({
             name: 'Alice Johnson',
             email: 'alice@mit.edu',
@@ -61,7 +61,7 @@ const seed = async () => {
             collegeId: mit._id,
         });
 
-        // 6. Create Recruiters
+        
         const recruiter = await User.create({
             name: 'Tech Corp Recruiter',
             email: 'recruiter@techcorp.com',
@@ -69,7 +69,7 @@ const seed = async () => {
             role: Role.RECRUITER,
         });
 
-        // 7. Create Course
+        
         const course = await Course.create({
             title: 'Advanced React Patterns',
             description: 'Master React with advanced patterns and performance optimization.',
@@ -77,7 +77,7 @@ const seed = async () => {
             collegeId: mit._id,
         });
 
-        // 8. Create Job (Global)
+        
         await Job.create({
             title: 'Full Stack Developer',
             company: 'Tech Corp',

@@ -111,7 +111,7 @@ const OverallSystemAnalytics = () => {
                             ))}
                         </div>
                     </div>
-                    {/* Placeholder for real chart */}
+                    {}
                     <div className="h-64 bg-slate-50/50 rounded-[2rem] border-2 border-dashed border-slate-200 flex flex-col items-center justify-center">
                         <motion.div
                             key={velocityPeriod}

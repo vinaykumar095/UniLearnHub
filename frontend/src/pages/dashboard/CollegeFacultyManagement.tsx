@@ -69,7 +69,7 @@ const CollegeFacultyManagement = () => {
 
     return (
         <div className="max-w-7xl mx-auto space-y-8 pb-20">
-            {/* Header */}
+            {}
             <div className="flex items-center gap-5">
                 <div className="p-3 bg-indigo-600 rounded-2xl shadow-lg shadow-indigo-200">
                     <GraduationCap className="w-7 h-7 text-white" />
@@ -80,7 +80,7 @@ const CollegeFacultyManagement = () => {
                 </div>
             </div>
 
-            {/* Stats */}
+            {}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 {[
                     { label: 'Total Faculty', value: faculty.length, icon: GraduationCap, color: 'text-indigo-600', bg: 'bg-indigo-50' },
@@ -98,7 +98,7 @@ const CollegeFacultyManagement = () => {
                 ))}
             </div>
 
-            {/* Filters */}
+            {}
             <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -116,7 +116,7 @@ const CollegeFacultyManagement = () => {
                 </div>
             </div>
 
-            {/* Faculty List */}
+            {}
             <div className="space-y-2">
                 {filtered.length === 0 && (
                     <div className="py-24 text-center bg-white rounded-[3rem] border border-dashed border-slate-200">

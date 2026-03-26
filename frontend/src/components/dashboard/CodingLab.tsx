@@ -60,12 +60,12 @@ const getStarterCode = (problem: DSAProblem | undefined, langId: string) => {
             return `class Solution:\n    def ${funcName}(self, ${paramStr}):\n        # Write your code here\n        pass`;
         case 'cpp':
             const returnType = problem?.title?.toLowerCase().includes('sum') || problem?.title?.toLowerCase().includes('factorial') ? 'long long' : 'int';
-            return `class Solution {\npublic:\n    ${returnType} ${funcName}(${cppParamStr}) {\n        // Your code here\n    }\n};`;
+            return `class Solution {\npublic:\n    ${returnType} ${funcName}(${cppParamStr}) {\n        
         case 'java':
             const jReturnType = problem?.title?.toLowerCase().includes('sum') || problem?.title?.toLowerCase().includes('factorial') ? 'long' : 'int';
-            return `class Solution {\n    public ${jReturnType} ${funcName}(${javaParamStr}) {\n        // Your code here\n        return 0;\n    }\n}`;
+            return `class Solution {\n    public ${jReturnType} ${funcName}(${javaParamStr}) {\n        
         case 'javascript':
-            return `/**\n * @param {any} ${params[0]}\n * @return {any}\n */\nvar ${funcName} = function(${paramStr}) {\n    // Your code here\n};`;
+            return `\nvar ${funcName} = function(${paramStr}) {\n    
         default:
             const lang = LANGUAGES.find(l => l.id === langId);
             return lang?.default || "";
@@ -75,8 +75,8 @@ const getStarterCode = (problem: DSAProblem | undefined, langId: string) => {
 const getDefaultTests = (problem: DSAProblem | undefined) => {
     if (problem?.testCases && problem.testCases.length > 0) return problem.testCases;
     
-    // Fallback placeholder test case if none provided
-    // Try to extract from examples
+    
+    
     if (problem?.examples && problem.examples.length > 0) {
         return problem.examples.map((ex, idx) => ({
             input: ex.input,
@@ -438,7 +438,7 @@ const CodingLab = ({ problem, onClose }: CodingLabProps) => {
                 </div>
             </div>
 
-            {/* Status Bar */}
+            {}
             <div className="h-8 px-6 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-[9px] font-black uppercase tracking-widest text-slate-600">
                 <div className="flex items-center gap-4">
                     <span className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Online</span>

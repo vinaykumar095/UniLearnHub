@@ -8,7 +8,7 @@ import {
 import { useAuth } from '../../context/AuthContext';
 import api from '../../api/client';
 
-// ─── IMPORTANT: All sub-components OUTSIDE Portfolio to avoid remount on every keystroke ───
+
 
 const Field = ({ label, icon: Icon, ...props }: any) => (
     <div>
@@ -104,7 +104,7 @@ const ResumeModal = ({ portfolio, user, onClose }: any) => {
                 </div>
                 <div className="overflow-y-auto p-8 font-['Times_New_Roman',serif] text-black text-[13px] leading-relaxed">
                     <div id="resume-content">
-                        {/* Header */}
+                        {}
                         <div className="header-center" style={{ textAlign: 'center' }}>
                             <div className="name" style={{ fontSize: '22pt', fontWeight: 'bold', textTransform: 'uppercase' }}>{user?.name}</div>
                             <div className="location" style={{ fontSize: '9pt', marginBottom: '4px' }}>
@@ -200,12 +200,12 @@ const ResumeModal = ({ portfolio, user, onClose }: any) => {
     );
 };
 
-// ─── Main Component ───────────────────────────────────────────────────────────
+
 const Portfolio = () => {
     const { user } = useAuth();
     const [portfolio, setPortfolio] = useState<any>(null);
     const [loading, setLoading] = useState(true);
-    const [saving, setSaving] = useState<string | null>(null); // which section is saving
+    const [saving, setSaving] = useState<string | null>(null); 
     const [saved, setSaved] = useState<string | null>(null);
     const [showResume, setShowResume] = useState(false);
     const [showProjectModal, setShowProjectModal] = useState(false);
@@ -213,7 +213,7 @@ const Portfolio = () => {
     const [newSkill, setNewSkill] = useState('');
     const [expandedSection, setExpandedSection] = useState<string | null>('personal');
 
-    // Separate local form states — NOT written to portfolio state on each keystroke
+    
     const [personalForm, setPersonalForm] = useState({ city: '', state: '', country: '', bio: '' });
     const [academicForm, setAcademicForm] = useState({ college: '', branch: '', year: '', cgpa: '' });
     const [profilesForm, setProfilesForm] = useState({ github: '', linkedin: '', leetcode: '', codechef: '', hackerrank: '', website: '' });
@@ -307,7 +307,7 @@ const Portfolio = () => {
 
     return (
         <div className="space-y-4 max-w-3xl">
-            {/* Header */}
+            {}
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-2xl font-black text-slate-900">My Portfolio</h1>
@@ -319,7 +319,7 @@ const Portfolio = () => {
                 </button>
             </div>
 
-            {/* Profile banner */}
+            {}
             <div className="bg-gradient-to-r from-primary-600 to-indigo-600 rounded-2xl p-5 flex items-center gap-4 text-white">
                 <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center text-xl font-black flex-shrink-0">{user?.name?.charAt(0)}</div>
                 <div>
@@ -329,7 +329,7 @@ const Portfolio = () => {
                 </div>
             </div>
 
-            {/* ── Personal ── */}
+            {}
             <Section id="personal" title="Personal Information" icon={User} color="text-blue-600" bg="bg-blue-50"
                 expanded={expandedSection === 'personal'} onToggle={toggle} saving={saving === 'personal'}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
@@ -346,7 +346,7 @@ const Portfolio = () => {
                 <SaveBtn sectionId="personal" color="bg-blue-600 hover:bg-blue-700" />
             </Section>
 
-            {/* ── Academic ── */}
+            {}
             <Section id="academic" title="Academic Details" icon={BookOpen} color="text-violet-600" bg="bg-violet-50"
                 expanded={expandedSection === 'academic'} onToggle={toggle} saving={saving === 'academic'}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
@@ -358,7 +358,7 @@ const Portfolio = () => {
                 <SaveBtn sectionId="academic" color="bg-violet-600 hover:bg-violet-700" />
             </Section>
 
-            {/* ── Profiles ── */}
+            {}
             <Section id="profiles" title="Social & Coding Profiles" icon={Code2} color="text-emerald-600" bg="bg-emerald-50"
                 expanded={expandedSection === 'profiles'} onToggle={toggle} saving={saving === 'profiles'}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
@@ -372,7 +372,7 @@ const Portfolio = () => {
                 <SaveBtn sectionId="profiles" color="bg-emerald-600 hover:bg-emerald-700" />
             </Section>
 
-            {/* ── Skills ── */}
+            {}
             <Section id="skills" title="Skills" icon={Tag} color="text-orange-600" bg="bg-orange-50"
                 expanded={expandedSection === 'skills'} onToggle={toggle} saving={saving === 'skills'}>
                 <div className="flex flex-wrap gap-2 mt-3 mb-3">
@@ -397,7 +397,7 @@ const Portfolio = () => {
                 </div>
             </Section>
 
-            {/* ── Projects ── */}
+            {}
             <Section id="projects" title={`Projects (${portfolio?.projects?.length || 0})`} icon={FolderOpen} color="text-blue-600" bg="bg-blue-50"
                 expanded={expandedSection === 'projects'} onToggle={toggle} saving={saving === 'projects'}>
                 <div className="space-y-3 mt-3 mb-3">
@@ -420,7 +420,7 @@ const Portfolio = () => {
                 </button>
             </Section>
 
-            {/* ── Certificates ── */}
+            {}
             <Section id="certs" title={`Certificates (${portfolio?.certificates?.length || 0})`} icon={Award} color="text-amber-600" bg="bg-amber-50"
                 expanded={expandedSection === 'certs'} onToggle={toggle} saving={saving === 'certs'}>
                 <div className="space-y-3 mt-3 mb-3">
@@ -445,7 +445,7 @@ const Portfolio = () => {
                 </button>
             </Section>
 
-            {/* ── Modals ── */}
+            {}
             {showResume && <ResumeModal portfolio={{ ...portfolio, ...personalForm, ...academicForm, ...profilesForm }} user={user} onClose={() => setShowResume(false)} />}
 
             {showProjectModal && (

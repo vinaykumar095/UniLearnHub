@@ -66,7 +66,7 @@ const CollegeRegister = () => {
 
     return (
         <div className="min-h-screen flex bg-white overflow-hidden">
-            {/* Left: Form */}
+            {}
             <div className="w-full lg:w-[50%] flex flex-col justify-center p-8 md:p-12 lg:p-16 overflow-y-auto">
                 <Link to="/login" className="flex items-center gap-2 text-slate-400 hover:text-primary-600 font-bold mb-10 group transition-colors w-fit">
                     <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -91,7 +91,7 @@ const CollegeRegister = () => {
                     )}
 
                     <form onSubmit={handleSubmit} className="space-y-5">
-                        {/* College Name */}
+                        {}
                         <div className="space-y-2">
                             <label className="text-sm font-bold text-slate-700">College / University Name *</label>
                             <div className="relative group">
@@ -101,7 +101,7 @@ const CollegeRegister = () => {
                             </div>
                         </div>
 
-                        {/* Email */}
+                        {}
                         <div className="space-y-2">
                             <label className="text-sm font-bold text-slate-700">Official Email Address *</label>
                             <div className="relative group">
@@ -112,7 +112,7 @@ const CollegeRegister = () => {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                            {/* Principal Name */}
+                            {}
                             <div className="space-y-2">
                                 <label className="text-sm font-bold text-slate-700">Principal / Dean</label>
                                 <div className="relative group">
@@ -122,7 +122,7 @@ const CollegeRegister = () => {
                                 </div>
                             </div>
 
-                            {/* Phone */}
+                            {}
                             <div className="space-y-2">
                                 <label className="text-sm font-bold text-slate-700">Contact Phone</label>
                                 <div className="relative group">
@@ -133,7 +133,7 @@ const CollegeRegister = () => {
                             </div>
                         </div>
 
-                        {/* Location */}
+                        {}
                         <div className="space-y-2">
                             <label className="text-sm font-bold text-slate-700">City / Location</label>
                             <div className="relative group">
@@ -143,7 +143,7 @@ const CollegeRegister = () => {
                             </div>
                         </div>
 
-                        {/* Website */}
+                        {}
                         <div className="space-y-2">
                             <label className="text-sm font-bold text-slate-700">Website</label>
                             <div className="relative group">
@@ -157,7 +157,7 @@ const CollegeRegister = () => {
                             <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-4">Administrator Account</h3>
 
                             <div className="space-y-5">
-                                {/* Admin Name */}
+                                {}
                                 <div className="space-y-2">
                                     <label className="text-sm font-bold text-slate-700">Admin Full Name *</label>
                                     <div className="relative group">
@@ -168,7 +168,7 @@ const CollegeRegister = () => {
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                    {/* Password */}
+                                    {}
                                     <div className="space-y-2">
                                         <label className="text-sm font-bold text-slate-700">Password *</label>
                                         <div className="relative group">
@@ -178,7 +178,7 @@ const CollegeRegister = () => {
                                         </div>
                                     </div>
 
-                                    {/* Confirm Password */}
+                                    {}
                                     <div className="space-y-2">
                                         <label className="text-sm font-bold text-slate-700">Confirm Password *</label>
                                         <div className="relative group">
@@ -201,7 +201,7 @@ const CollegeRegister = () => {
                 </div>
             </div>
 
-            {/* Right: Visual */}
+            {}
             <div className="hidden lg:flex lg:w-[50%] bg-slate-900 relative overflow-hidden flex-col items-center justify-center p-20">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary-600/30 via-slate-900/60 to-slate-900" />
                 <div className="relative z-10 max-w-md text-center">

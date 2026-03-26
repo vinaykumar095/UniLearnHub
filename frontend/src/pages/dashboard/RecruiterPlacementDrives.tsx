@@ -29,7 +29,7 @@ const RecruiterPlacementDrives = () => {
     const [saving, setSaving] = useState(false);
     const [notified, setNotified] = useState(false);
     
-    // College state
+    
     const [allColleges, setAllColleges] = useState<any[]>([]);
     const [collegeSearch, setCollegeSearch] = useState('');
 
@@ -92,7 +92,7 @@ const RecruiterPlacementDrives = () => {
 
     return (
         <div className="max-w-6xl mx-auto space-y-8 pb-20">
-            {/* Notified toast */}
+            {}
             <AnimatePresence>
                 {notified && (
                     <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
@@ -102,7 +102,7 @@ const RecruiterPlacementDrives = () => {
                 )}
             </AnimatePresence>
 
-            {/* Header */}
+            {}
             <div className="flex flex-col md:flex-row md:items-center gap-5 justify-between">
                 <div className="flex items-center gap-5">
                     <div className="p-3 bg-amber-500 rounded-2xl shadow-lg shadow-amber-200">
@@ -119,7 +119,7 @@ const RecruiterPlacementDrives = () => {
                 </button>
             </div>
 
-            {/* Stats */}
+            {}
             <div className="grid grid-cols-3 gap-4">
                 {[
                     { label: 'Total Drives', value: drives.length, color: 'text-amber-600' },
@@ -133,7 +133,7 @@ const RecruiterPlacementDrives = () => {
                 ))}
             </div>
 
-            {/* Create Form */}
+            {}
             <AnimatePresence>
                 {showForm && (
                     <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}
@@ -177,7 +177,7 @@ const RecruiterPlacementDrives = () => {
                                 </div>
                             </div>
 
-                            {/* Visibility Section */}
+                            {}
                             <div className="bg-slate-50 rounded-3xl p-8 space-y-6">
                                 <div className="flex items-center gap-3">
                                     <Globe className="w-5 h-5 text-indigo-600" />
@@ -252,7 +252,7 @@ const RecruiterPlacementDrives = () => {
                 )}
             </AnimatePresence>
 
-            {/* Drive Cards */}
+            {}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {drives.map((drive, i) => {
                     const meta = STATUS_META[drive.status] ?? STATUS_META.UPCOMING;

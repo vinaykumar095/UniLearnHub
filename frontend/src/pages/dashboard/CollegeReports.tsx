@@ -38,7 +38,7 @@ const CollegeReports = () => {
         load();
     }, []);
 
-    // Analytics
+    
     const branchCount: Record<string, number> = {};
     const skillCount: Record<string, number> = {};
     let totalCgpa = 0, cgpaCount = 0;
@@ -75,7 +75,7 @@ const CollegeReports = () => {
                 </div>
             </div>
 
-            {/* Top Stats */}
+            {}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
                     { label: 'Total Students', value: students.length, icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
@@ -95,7 +95,7 @@ const CollegeReports = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Branch Distribution */}
+                {}
                 <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8 space-y-5">
                     <h3 className="font-black text-slate-900 text-lg italic flex items-center gap-2">
                         <TrendingUp className="w-5 h-5 text-slate-400" /> Students by Branch
@@ -118,7 +118,7 @@ const CollegeReports = () => {
                     </div>
                 </div>
 
-                {/* Skills Overview */}
+                {}
                 <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8 space-y-5">
                     <h3 className="font-black text-slate-900 text-lg italic flex items-center gap-2">
                         <Zap className="w-5 h-5 text-slate-400" /> Top Student Skills
@@ -134,7 +134,7 @@ const CollegeReports = () => {
                     </div>
                 </div>
 
-                {/* Placement Stats */}
+                {}
                 <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8 space-y-5">
                     <h3 className="font-black text-slate-900 text-lg italic flex items-center gap-2">
                         <Briefcase className="w-5 h-5 text-slate-400" /> Placement Reports
@@ -155,7 +155,7 @@ const CollegeReports = () => {
                     </div>
                 </div>
 
-                {/* Faculty Activity */}
+                {}
                 <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8 space-y-5">
                     <h3 className="font-black text-slate-900 text-lg italic flex items-center gap-2">
                         <GraduationCap className="w-5 h-5 text-slate-400" /> Faculty Overview

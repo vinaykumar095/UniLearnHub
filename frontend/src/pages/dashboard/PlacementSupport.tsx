@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import api from '../../api/client';
 
-// ─── Static Resource Data ─────────────────────────────────────────────────────
+
 
 const INTERVIEW_PREP = [
     {
@@ -75,7 +75,7 @@ const RESUME_RESOURCES = [
     { label: 'Resume Worded (AI Feedback)', url: 'https://resumeworded.com' },
 ];
 
-// ─── Tab definitions ──────────────────────────────────────────────────────────
+
 
 const TABS = [
     { id: 'interview', label: 'Interview Prep', icon: Briefcase },
@@ -84,13 +84,13 @@ const TABS = [
     { id: 'publish', label: 'Publish Resource', icon: Plus },
 ];
 
-// ─── PlacementSupport Component ───────────────────────────────────────────────
+
 
 const PlacementSupport = () => {
     const [activeTab, setActiveTab] = useState('interview');
     const [expandedCategory, setExpandedCategory] = useState<string | null>('HR Interview');
 
-    // Publish Resource state
+    
     const [resTitle, setResTitle] = useState('');
     const [resCategory, setResCategory] = useState('INTERVIEW');
     const [resUrl, setResUrl] = useState('');
@@ -131,7 +131,7 @@ const PlacementSupport = () => {
                 studentId: null,
                 impacts: { dashboard: true, roadmap: false },
                 isBroadcast: true,
-            }).catch(() => { /* graceful fail if endpoint doesn't support broadcast yet */ });
+            }).catch(() => {  });
             setPublished(true);
             setResTitle(''); setResUrl(''); setResDesc('');
             setTimeout(() => setPublished(false), 3000);
@@ -142,7 +142,7 @@ const PlacementSupport = () => {
 
     return (
         <div className="max-w-7xl mx-auto space-y-10 pb-20">
-            {/* Header */}
+            {}
             <div className="flex flex-col md:flex-row md:items-center gap-6 justify-between">
                 <div className="flex items-center gap-5">
                     <div className="p-3 bg-emerald-600 rounded-2xl shadow-lg shadow-emerald-200">
@@ -153,14 +153,14 @@ const PlacementSupport = () => {
                         <p className="text-slate-500 font-medium text-sm mt-0.5">Curate interview, coding & resume resources that appear in student Placement Prep</p>
                     </div>
                 </div>
-                {/* Live badge */}
+                {}
                 <div className="flex items-center gap-2 px-5 py-3 bg-emerald-50 border border-emerald-200 rounded-2xl">
                     <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     <span className="text-xs font-black text-emerald-700 uppercase tracking-widest">Live Sync with Student Module</span>
                 </div>
             </div>
 
-            {/* Quick stats */}
+            {}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
                     { label: 'Interview Tips', value: INTERVIEW_PREP.reduce((a, c) => a + c.tips.length, 0), icon: Briefcase, color: 'bg-indigo-50 text-indigo-600' },
@@ -181,7 +181,7 @@ const PlacementSupport = () => {
                 ))}
             </div>
 
-            {/* Tab Bar */}
+            {}
             <div className="flex gap-2 bg-slate-100 p-1.5 rounded-2xl w-fit">
                 {TABS.map(tab => {
                     const Icon = tab.icon;
@@ -198,7 +198,7 @@ const PlacementSupport = () => {
 
             <AnimatePresence mode="wait">
 
-                {/* ── INTERVIEW PREP TAB ── */}
+                {}
                 {activeTab === 'interview' && (
                     <motion.div key="interview" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
                         className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -459,7 +459,7 @@ const PlacementSupport = () => {
                                     </div>
                                 </div>
 
-                                {/* Title */}
+                                {}
                                 <div className="space-y-2">
                                     <label className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Resource Title</label>
                                     <input type="text" required value={resTitle} onChange={e => setResTitle(e.target.value)}
@@ -467,7 +467,7 @@ const PlacementSupport = () => {
                                         className="w-full px-6 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-emerald-600 outline-none font-medium text-sm transition-all" />
                                 </div>
 
-                                {/* URL */}
+                                {}
                                 <div className="space-y-2">
                                     <label className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Resource URL</label>
                                     <div className="relative">
@@ -478,7 +478,7 @@ const PlacementSupport = () => {
                                     </div>
                                 </div>
 
-                                {/* Description */}
+                                {}
                                 <div className="space-y-2">
                                     <label className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Brief Description (Optional)</label>
                                     <textarea rows={3} value={resDesc} onChange={e => setResDesc(e.target.value)}
@@ -486,7 +486,7 @@ const PlacementSupport = () => {
                                         className="w-full p-5 bg-slate-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-emerald-600 outline-none font-medium text-sm resize-none transition-all" />
                                 </div>
 
-                                {/* Submit */}
+                                {}
                                 <AnimatePresence>
                                     {published ? (
                                         <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }}
@@ -504,7 +504,7 @@ const PlacementSupport = () => {
                             </form>
                         </div>
 
-                        {/* Note box */}
+                        {}
                         <div className="flex items-start gap-4 bg-indigo-50 border border-indigo-100 rounded-2xl p-5">
                             <Zap className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
                             <p className="text-sm font-medium text-indigo-700 leading-relaxed">

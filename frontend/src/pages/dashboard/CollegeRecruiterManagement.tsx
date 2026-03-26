@@ -53,7 +53,7 @@ const CollegeRecruiterManagement = () => {
                 </div>
             </div>
 
-            {/* Stats */}
+            {}
             <div className="grid grid-cols-3 gap-4">
                 {[
                     { label: 'Total Recruiters', value: recruiters.length, icon: Building2, color: 'text-emerald-600', bg: 'bg-emerald-50' },

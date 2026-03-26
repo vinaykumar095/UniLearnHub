@@ -50,7 +50,7 @@ import GlobalProfileView from './pages/dashboard/GlobalProfileView';
 import GlobalCollegeView from './pages/dashboard/GlobalCollegeView';
 import { useAuth } from './context/AuthContext';
 
-// ─── Error Boundary ────────────────────────────────────────────────────────────
+
 class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { error: Error | null }> {
     constructor(props: any) {
         super(props);
@@ -125,9 +125,9 @@ function App() {
                             <Route path="jobs" element={<Jobs />} />
                             <Route path="colleges" element={<Colleges />} />
                             <Route path="approvals" element={<Approvals />} />
-                            <Route path="settings" element={<Settings />} /> {/* Added Settings route */}
-                            <Route path="faculty/courses" element={<FacultyCourses />} /> {/* Modified path */}
-                            <Route path="faculty/courses/:id" element={<CourseManagement />} /> {/* Modified path */}
+                            <Route path="settings" element={<Settings />} /> {}
+                            <Route path="faculty/courses" element={<FacultyCourses />} /> {}
+                            <Route path="faculty/courses/:id" element={<CourseManagement />} /> {}
                             <Route path="faculty/students" element={<StudentManagement />} />
                             <Route path="faculty/guidance" element={<FacultyGuidance />} />
                             <Route path="faculty/profile" element={<FacultyProfile />} />
@@ -145,7 +145,7 @@ function App() {
                             <Route path="recruiter/insights" element={<RecruiterStudentInsights />} />
                             <Route path="recruiter/drives" element={<RecruiterPlacementDrives />} />
                             <Route path="recruiter/announcements" element={<RecruiterAnnouncements />} />
-                            {/* ── College Admin ── */}
+                            {}
                             <Route path="college/profile" element={<CollegeAdminProfile />} />
                             <Route path="college/students" element={<CollegeStudentManagement />} />
                             <Route path="college/faculty" element={<CollegeFacultyManagement />} />
@@ -154,7 +154,7 @@ function App() {
                             <Route path="college/placement" element={<CollegePlacementOversight />} />
                             <Route path="college/notifications" element={<CollegeNotifications />} />
                             <Route path="college/reports" element={<CollegeReports />} />
-                            {/* ── Overall Admin (Central) ── */}
+                            {}
                             <Route path="admin/profile" element={<OverallAdminProfile />} />
                             <Route path="admin/colleges" element={<Colleges />} />
                             <Route path="admin/recruiters" element={<OverallRecruiterManagement />} />

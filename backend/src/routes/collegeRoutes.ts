@@ -5,11 +5,11 @@ import { Role } from '../models/User';
 
 const router = Router();
 
-// Public: Self-registration for colleges
+
 router.post('/register', registerCollege);
 router.get('/public-stats', getPlatformStats);
 
-// Admin-only: Create, manage, approve colleges
+
 router.post('/', protect, authorize(Role.CENTRAL_ADMIN), createCollege);
 router.get('/', getColleges);
 router.get('/:id', protect, authorize(Role.CENTRAL_ADMIN), getCollegeById);

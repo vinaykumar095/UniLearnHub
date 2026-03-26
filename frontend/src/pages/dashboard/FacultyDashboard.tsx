@@ -77,7 +77,7 @@ const FacultyDashboard = () => {
 
     return (
         <div className="space-y-10 pb-20 max-w-7xl mx-auto">
-            {/* 1. Welcome Card */}
+            {}
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -106,7 +106,7 @@ const FacultyDashboard = () => {
                 </div>
             </motion.div>
 
-            {/* 2. Quick Stats */}
+            {}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <StatWidget icon={BookOpen} label="Courses Created" value={totalCourses} color="bg-blue-50 text-blue-600" delay={0.1} />
                 <StatWidget icon={Users} label="Students Enrolled" value={totalStudents} color="bg-emerald-50 text-emerald-600" delay={0.2} />
@@ -115,9 +115,9 @@ const FacultyDashboard = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-                {/* Left Column: Progress & Activity */}
+                {}
                 <div className="lg:col-span-8 space-y-10">
-                    {/* Course Overview Hub */}
+                    {}
                     <div>
                         <SectionHeader icon={TrendingUp} title="Course Progress Analytics" link="/dashboard/faculty/courses" linkText="Full Audit" />
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -160,7 +160,7 @@ const FacultyDashboard = () => {
                         </div>
                     </div>
 
-                    {/* Student Activity Summary */}
+                    {}
                     <div>
                         <SectionHeader icon={Activity} title="Engagement Pulse (Student Activity Summary)" link="/dashboard/faculty/students" linkText="View All Pulses" />
                         <div className="bg-white rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden divide-y divide-slate-50">
@@ -193,9 +193,9 @@ const FacultyDashboard = () => {
                     </div>
                 </div>
 
-                {/* Right Column: Radar & Deadlines */}
+                {}
                 <div className="lg:col-span-4 space-y-10">
-                    {/* Academic Radar (Notifications) */}
+                    {}
                     <div>
                         <SectionHeader icon={Bell} title="Academic Radar" link="/dashboard/notifications" linkText="Alert Center" />
                         <div className="space-y-4">
@@ -225,7 +225,7 @@ const FacultyDashboard = () => {
                         </div>
                     </div>
 
-                    {/* Upcoming Deadlines Radar */}
+                    {}
                     <div>
                         <SectionHeader icon={Clock} title="Task Horizon" />
                         <div className="bg-slate-900 rounded-[3rem] p-10 text-white relative overflow-hidden group shadow-2xl shadow-slate-900/40">
@@ -256,7 +256,7 @@ const FacultyDashboard = () => {
                         </div>
                     </div>
 
-                    {/* Quick Access Grid */}
+                    {}
                     <div className="grid grid-cols-2 gap-4">
                         <Link to="/dashboard/faculty/announcements" className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm text-center hover:bg-slate-900 hover:text-white transition-all group">
                             <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mx-auto mb-3 group-hover:bg-primary-600 group-hover:text-white transition-all">

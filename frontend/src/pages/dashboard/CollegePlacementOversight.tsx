@@ -66,7 +66,7 @@ const CollegePlacementOversight = () => {
                 </div>
             </div>
 
-            {/* Application Status Strip */}
+            {}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                 {Object.entries(STATUS_META).map(([status, meta]) => (
                     <div key={status} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 text-center">
@@ -79,7 +79,7 @@ const CollegePlacementOversight = () => {
                 ))}
             </div>
 
-            {/* Summary Stats */}
+            {}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
                     { label: 'Total Jobs', value: jobs.length, icon: Briefcase, color: 'text-indigo-600', bg: 'bg-indigo-50' },
@@ -97,7 +97,7 @@ const CollegePlacementOversight = () => {
                 ))}
             </div>
 
-            {/* Job-wise Application Summary */}
+            {}
             <div className="space-y-3">
                 <h2 className="text-lg font-black text-slate-900 italic flex items-center gap-2 px-1">
                     <Briefcase className="w-5 h-5 text-slate-400" /> Job-Wise Breakdown

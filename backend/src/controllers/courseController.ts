@@ -37,7 +37,7 @@ export const createCourse = async (req: any, res: Response) => {
         console.log(`[createCourse] Course created successfully:`, course._id, `Status:`, course.status);
         res.status(201).json(course);
 
-        // Notify College Admin
+        
         (async () => {
             try {
                 const { createNotification } = require('./notificationController');
@@ -71,15 +71,15 @@ export const getCourses = async (req: any, res: Response) => {
             }
         }
 
-        // Students see only approved courses
+        
         if (req.user?.role === 'STUDENT') {
             query.status = 'approved';
         } else if (status) {
-            // Admin roles can filter by any status
+            
             query.status = status;
         }
 
-        // COLLEGE_ADMIN: scope to their college if not Central Admin
+        
         if (req.user?.role === 'COLLEGE_ADMIN' && req.user?.collegeId) {
             console.log(`[getCourses] COLLEGE_ADMIN enforcing collegeId:`, req.user.collegeId);
             const mongoose = require('mongoose');
@@ -150,7 +150,7 @@ export const enrollInCourse = async (req: any, res: Response) => {
 
         const enrollment = await Enrollment.create({ studentId, courseId });
 
-        // Increment enrollment count
+        
         await Course.findByIdAndUpdate(courseId, { $inc: { enrollmentCount: 1 } });
 
         res.status(201).json(enrollment);
@@ -194,7 +194,7 @@ export const updateCourse = async (req: any, res: Response) => {
 export const updateCourseMaterials = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { materials } = req.body; // Expecting IMaterial[]
+        const { materials } = req.body; 
         const course = await Course.findByIdAndUpdate(id, { materials }, { returnDocument: 'after' });
         res.json(course);
     } catch (error) {

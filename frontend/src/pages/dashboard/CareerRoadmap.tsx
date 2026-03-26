@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import api from '../../api/client';
 
-// Detailed Stage-based Roadmaps for various roles
+
 const roadmapTemplates: Record<string, any[]> = {
     'Software Engineer': [
         {
@@ -269,7 +269,7 @@ const CareerRoadmap = () => {
             ]);
             if (rmRes.data) setRoadmap(rmRes.data);
             if (gdRes.data) {
-                // Filter only guidance meant for roadmap impact and relevant types
+                
                 const roadmapGuidance = gdRes.data.filter((g: any) => 
                     g.impacts?.roadmap && 
                     ['CAREER_PATH', 'SKILL_RECOMMENDATION', 'LEARNING_MILESTONE', 'GENERAL_FEEDBACK'].includes(g.type)
@@ -560,7 +560,7 @@ const CareerRoadmap = () => {
                         })}
                     </div>
 
-                    {/* Final CTA */}
+                    {}
                     <div className="bg-indigo-900 rounded-[3rem] p-12 text-center relative overflow-hidden shadow-2xl mt-12">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-primary-500/10 blur-[100px]" />
                         <div className="relative z-10 space-y-4">

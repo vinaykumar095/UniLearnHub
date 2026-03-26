@@ -14,7 +14,7 @@ const DSASubmissionSchema: Schema = new Schema({
     completedAt: { type: Date, default: Date.now }
 }, { timestamps: true });
 
-// Ensure a student can only have one "solved" record per problem
+
 DSASubmissionSchema.index({ studentId: 1, problemId: 1 }, { unique: true });
 
 export default mongoose.model<IDSASubmission>('DSASubmission', DSASubmissionSchema);

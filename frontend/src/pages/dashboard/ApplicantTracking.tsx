@@ -28,7 +28,7 @@ const ApplicantTracking = () => {
     const [editNote, setEditNote] = useState<string | null>(null);
     const [expanded, setExpanded] = useState<string | null>(null);
 
-    const isGlobal = !jobId;  // /recruiter/applications vs /recruiter/jobs/:id
+    const isGlobal = !jobId;  
 
     useEffect(() => {
         const load = async () => {
@@ -80,7 +80,7 @@ const ApplicantTracking = () => {
 
     return (
         <div className="max-w-7xl mx-auto space-y-8 pb-20">
-            {/* Header */}
+            {}
             <div className="flex items-center gap-5">
                 {!isGlobal && (
                     <Link to="/dashboard/recruiter/jobs" className="p-3 hover:bg-slate-100 rounded-2xl transition-colors shrink-0">
@@ -102,7 +102,7 @@ const ApplicantTracking = () => {
                 </div>
             </div>
 
-            {/* Stats Strip */}
+            {}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                 {STATUSES.map(s => {
                     const meta = STATUS_META[s];
@@ -119,7 +119,7 @@ const ApplicantTracking = () => {
                 })}
             </div>
 
-            {/* Search & Filter */}
+            {}
             <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-5 flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -140,7 +140,7 @@ const ApplicantTracking = () => {
                 </div>
             </div>
 
-            {/* Applicant Cards */}
+            {}
             <div className="space-y-3">
                 {filtered.length === 0 && (
                     <div className="py-24 text-center bg-white rounded-[3rem] border border-dashed border-slate-200">
@@ -154,7 +154,7 @@ const ApplicantTracking = () => {
                     return (
                         <motion.div key={app._id} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}
                             className="bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden hover:shadow-md transition-all">
-                            {/* Header Row */}
+                            {}
                             <div className="p-5 flex items-center gap-5 cursor-pointer hover:bg-slate-50/50 transition-colors"
                                 onClick={() => setExpanded(isOpen ? null : app._id)}>
                                 <div className="w-12 h-12 bg-indigo-600 rounded-xl shrink-0 flex items-center justify-center text-white font-black text-lg">
@@ -180,13 +180,13 @@ const ApplicantTracking = () => {
                                 </div>
                             </div>
 
-                            {/* Expanded */}
+                            {}
                             <AnimatePresence>
                                 {isOpen && (
                                     <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
                                         className="border-t border-slate-50">
                                         <div className="p-6 space-y-5">
-                                            {/* Student Info */}
+                                            {}
                                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                                                 {[
                                                     { label: 'Branch', value: app.studentId?.branch, icon: GraduationCap },
@@ -204,7 +204,7 @@ const ApplicantTracking = () => {
                                                 ))}
                                             </div>
 
-                                            {/* Skills */}
+                                            {}
                                             {(app.studentId?.skills ?? []).length > 0 && (
                                                 <div>
                                                     <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-1"><Zap className="w-3 h-3" /> Skills</p>
@@ -216,14 +216,14 @@ const ApplicantTracking = () => {
                                                 </div>
                                             )}
 
-                                            {/* Applied At */}
+                                            {}
                                             {app.createdAt && (
                                                 <p className="text-[10px] font-bold text-slate-400 flex items-center gap-1.5">
                                                     <Clock className="w-3 h-3" /> Applied {new Date(app.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                                                 </p>
                                             )}
 
-                                            {/* Recruiter Notes */}
+                                            {}
                                             <div className="space-y-2">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-1.5"><MessageSquare className="w-3 h-3" /> Recruiter Notes</p>
@@ -244,7 +244,7 @@ const ApplicantTracking = () => {
                                                 )}
                                             </div>
 
-                                            {/* Actions */}
+                                            {}
                                             <div className="flex flex-wrap gap-2 pt-2">
                                                 {[
                                                     { label: 'Shortlist', status: 'shortlisted', cls: 'bg-emerald-600 text-white hover:bg-emerald-700', icon: CheckCircle },

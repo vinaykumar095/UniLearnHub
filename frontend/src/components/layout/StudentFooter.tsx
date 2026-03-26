@@ -6,7 +6,7 @@ const StudentFooter = () => {
         <footer className="bg-slate-900 text-white mt-20 pt-20 pb-10 rounded-t-[3rem]">
             <div className="max-w-7xl mx-auto px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
-                    {/* Brand Info */}
+                    {}
                     <div className="space-y-8">
                         <div className="flex items-center gap-4">
                             <div className="w-16 h-16 bg-primary-600 rounded-[2rem] flex items-center justify-center shadow-2xl shadow-primary-500/20">
@@ -26,7 +26,7 @@ const StudentFooter = () => {
                         </div>
                     </div>
 
-                    {/* Quick Links */}
+                    {}
                     <div className="space-y-8">
                         <h4 className="text-xl font-black">Quick Links</h4>
                         <nav className="flex flex-col gap-4">
@@ -46,7 +46,7 @@ const StudentFooter = () => {
                         </nav>
                     </div>
 
-                    {/* Resources */}
+                    {}
                     <div className="space-y-8">
                         <h4 className="text-xl font-black">Resources</h4>
                         <nav className="flex flex-col gap-4">
@@ -58,7 +58,7 @@ const StudentFooter = () => {
                         </nav>
                     </div>
 
-                    {/* Contact Info */}
+                    {}
                     <div className="space-y-8">
                         <h4 className="text-xl font-black">Get in Touch</h4>
                         <div className="space-y-6">

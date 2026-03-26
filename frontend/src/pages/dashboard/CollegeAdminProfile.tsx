@@ -82,7 +82,7 @@ const CollegeAdminProfile = () => {
 
     return (
         <div className="max-w-4xl mx-auto space-y-8 pb-20">
-            {/* Hero */}
+            {}
             <div className="bg-slate-900 rounded-[3rem] p-10 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/15 blur-[80px]" />
                 <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">

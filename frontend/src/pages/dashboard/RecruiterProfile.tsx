@@ -72,11 +72,11 @@ const RecruiterProfile = () => {
     return (
         <div className="max-w-5xl mx-auto space-y-8 pb-20">
 
-            {/* Hero Card */}
+            {}
             <div className="bg-slate-900 rounded-[3rem] p-10 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/15 blur-[80px]" />
                 <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
-                    {/* Company Logo / Avatar */}
+                    {}
                     <div className="relative">
                         <div className="w-28 h-28 bg-gradient-to-br from-indigo-500 to-indigo-800 rounded-[2.5rem] flex items-center justify-center text-4xl font-black text-white shadow-xl shadow-indigo-900/60">
                             {profile?.company?.charAt(0) ?? profile?.name?.charAt(0)}
@@ -105,7 +105,7 @@ const RecruiterProfile = () => {
             </div>
 
             <form onSubmit={handleSave} className="space-y-6">
-                {/* Personal Info */}
+                {}
                 <div className="bg-white rounded-[3rem] border border-slate-100 shadow-sm p-10 space-y-6">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center"><User className="w-5 h-5 text-slate-500" /></div>
@@ -122,7 +122,7 @@ const RecruiterProfile = () => {
                     </div>
                 </div>
 
-                {/* Company Info */}
+                {}
                 <div className="bg-white rounded-[3rem] border border-slate-100 shadow-sm p-10 space-y-6">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center"><Building2 className="w-5 h-5 text-indigo-600" /></div>
@@ -150,7 +150,7 @@ const RecruiterProfile = () => {
                         </div>
                     </div>
 
-                    {/* About */}
+                    {}
                     <div className="space-y-2">
                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">About Company</label>
                         <textarea rows={5} value={profile?.bio ?? ''} disabled={!editing}

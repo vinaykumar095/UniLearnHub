@@ -37,7 +37,7 @@ const RecruiterStudentInsights = () => {
             return a.name?.localeCompare(b.name ?? '') ?? 0;
         });
 
-    // Aggregate analytics
+    
     const branchCount: Record<string, number> = {};
     const skillCount: Record<string, number> = {};
     let totalCgpa = 0, cgpaCount = 0;
@@ -60,7 +60,7 @@ const RecruiterStudentInsights = () => {
 
     return (
         <div className="max-w-7xl mx-auto space-y-8 pb-20">
-            {/* Header */}
+            {}
             <div className="flex flex-col md:flex-row md:items-center gap-5 justify-between">
                 <div className="flex items-center gap-5">
                     <div className="p-3 bg-blue-600 rounded-2xl shadow-lg shadow-blue-200">
@@ -73,9 +73,9 @@ const RecruiterStudentInsights = () => {
                 </div>
             </div>
 
-            {/* Aggregate Analytics */}
+            {}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Quick Stats */}
+                {}
                 <div className="grid grid-cols-2 gap-4 md:col-span-1">
                     {[
                         { label: 'Total Students', value: students.length, icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
@@ -93,7 +93,7 @@ const RecruiterStudentInsights = () => {
                     ))}
                 </div>
 
-                {/* Branch Distribution */}
+                {}
                 <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-7 space-y-4">
                     <div className="flex items-center gap-3">
                         <BarChart3 className="w-5 h-5 text-slate-400" />
@@ -118,7 +118,7 @@ const RecruiterStudentInsights = () => {
                     </div>
                 </div>
 
-                {/* Top Skills */}
+                {}
                 <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-7 space-y-4">
                     <div className="flex items-center gap-3">
                         <PieChart className="w-5 h-5 text-slate-400" />
@@ -141,7 +141,7 @@ const RecruiterStudentInsights = () => {
                 </div>
             </div>
 
-            {/* Filters */}
+            {}
             <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-6 flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -169,7 +169,7 @@ const RecruiterStudentInsights = () => {
                 </div>
             </div>
 
-            {/* Student Cards */}
+            {}
             <div className="space-y-3">
                 {filtered.length === 0 && (
                     <div className="py-24 text-center bg-white rounded-[3rem] border border-dashed border-slate-200">

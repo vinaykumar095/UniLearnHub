@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import api from '../../api/client';
 
-// ─── Static data ──────────────────────────────────────────────────────────────
+
 
 const CAREER_PATHS = [
     { icon: Code2, label: 'Software Engineer', color: 'bg-blue-50 text-blue-600 border-blue-200', desc: 'Full-stack, systems, backend' },
@@ -85,7 +85,7 @@ const TYPE_META = {
     GENERAL_FEEDBACK: { icon: Award, color: 'amber', label: 'General Feedback', border: 'border-amber-500', bg: 'bg-amber-50', text: 'text-amber-600' },
 };
 
-// ─── Component ────────────────────────────────────────────────────────────────
+
 
 const FacultyGuidance = () => {
     const [students, setStudents] = useState<any[]>([]);
@@ -487,7 +487,7 @@ const FacultyGuidance = () => {
                             })}
                         </div>
 
-                        {/* Stats strip */}
+                        {}
                         {history.length > 0 && (
                             <div className="mt-8 bg-slate-900 rounded-[2rem] p-8 grid grid-cols-2 md:grid-cols-4 gap-6">
                                 {[
@@ -508,7 +508,7 @@ const FacultyGuidance = () => {
                 )}
             </AnimatePresence>
 
-            {/* Side info: career paths quick reference */}
+            {}
             {tab === 'compose' && selectedStudent && guidanceType === 'CAREER_PATH' && (
                 <div className="bg-gradient-to-br from-indigo-700 to-indigo-900 rounded-[2.5rem] p-8 text-white">
                     <h3 className="text-xs font-black uppercase tracking-[0.3em] mb-6 flex items-center gap-3">

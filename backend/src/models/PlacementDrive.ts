@@ -12,7 +12,7 @@ export interface IPlacementDrive extends Document {
     rounds: string[];
     registrationLink?: string;
     recruiterId: mongoose.Types.ObjectId;
-    colleges: mongoose.Types.ObjectId[]; // Empty means global
+    colleges: mongoose.Types.ObjectId[]; 
 }
 
 const PlacementDriveSchema: Schema = new Schema({

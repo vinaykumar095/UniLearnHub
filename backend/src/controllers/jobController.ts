@@ -54,7 +54,7 @@ export const getJobs = async (req: any, res: any) => {
         const user = req.user;
         let query: any = {};
 
-        // Auto-filter by college participation for Students and College Admins
+        
         const filterCollegeId = (user?.role === Role.COLLEGE_ADMIN || user?.role === Role.STUDENT) 
             ? user.collegeId 
             : req.query.collegeId;
@@ -103,7 +103,7 @@ export const applyForJob = async (req: any, res: ExpressResponse) => {
         const { jobId, resumeUrl, portfolioLink, coverLetter } = req.body;
         const studentId = req.user.id;
 
-        // Check for duplicate application
+        
         const existing = await Application.findOne({ jobId, studentId });
         if (existing) {
             return res.status(400).json({ message: 'You have already applied for this job' });
@@ -117,7 +117,7 @@ export const applyForJob = async (req: any, res: ExpressResponse) => {
             coverLetter
         });
 
-        // Notify Recruiter with Student Name
+        
         const job = await Job.findById(jobId);
         const student = await User.findById(studentId).select('name');
         if (job && student) {
@@ -173,7 +173,7 @@ export const updateApplicationStatus = async (req: any, res: any) => {
     }
 };
 
-// Student: get my own applications with status
+
 export const getStudentApplications = async (req: any, res: ExpressResponse) => {
     try {
         const studentId = req.user.id;
@@ -186,13 +186,13 @@ export const getStudentApplications = async (req: any, res: ExpressResponse) => 
     }
 };
 
-// College Admin: get all applications from their students
+
 export const getCollegeApplications = async (req: any, res: ExpressResponse) => {
     try {
         const collegeId = req.user.collegeId;
         if (!collegeId) return res.status(400).json({ message: 'College ID required' });
 
-        // Find students belonging to this college
+        
         const students = await User.find({ collegeId, role: Role.STUDENT }).select('_id');
         const studentIds = students.map(s => s._id);
 
@@ -215,13 +215,13 @@ export const getStudentDashboard = async (req: AuthRequest, res: ExpressResponse
     try {
         const studentId = req.user!.id;
 
-        // Fetch Guidance pulses
+        
         const guidances = await Guidance.find({ studentId, status: 'active', 'impacts.dashboard': true })
             .populate('facultyId', 'name')
             .sort({ createdAt: -1 })
             .limit(3);
 
-        // Basic Counts
+        
         const enrolledCount = await Enrollment.countDocuments({ studentId });
         const completedCoursesCount = await Enrollment.countDocuments({ studentId, progress: 100 });
         const appliedCount = await Application.countDocuments({ studentId });
@@ -229,25 +229,25 @@ export const getStudentDashboard = async (req: AuthRequest, res: ExpressResponse
         const aptitudeCompletedCount = await AptitudeStatus.countDocuments({ studentId, status: 'completed' });
         const dsaSolvedCount = await DSASubmission.countDocuments({ studentId, status: 'solved' });
 
-        const totalPlatformsItems = 120 + 36; // 120 DSA + 36 Aptitude topics
+        const totalPlatformsItems = 120 + 36; 
         const masteryIndex = Math.round(((dsaSolvedCount + aptitudeCompletedCount) / totalPlatformsItems) * 100);
 
-        // Fetch Enrollments for details
+        
         const enrollments = await Enrollment.find({ studentId })
             .populate({ path: 'courseId', populate: { path: 'facultyId', select: 'name' } });
 
         const enrolledCourseIds = enrollments.map(e => e.courseId._id);
 
-        // Pending Assignments
-        // 1. Get all assignments for enrolled courses
+        
+        
         const allAssignments = await Assignment.find({ courseId: { $in: enrolledCourseIds } });
-        // 2. Get all submissions by this student
+        
         const submissions = await Submission.find({ studentId }).select('assignmentId');
         const submittedIds = submissions.map(s => s.assignmentId.toString());
 
         const pendingAssignments = allAssignments.filter(a => !submittedIds.includes(a._id.toString()));
 
-        // Learning Progress List
+        
         const learningProgress = enrollments.map(e => ({
             id: e.courseId._id,
             title: (e.courseId as any).title,
@@ -255,13 +255,13 @@ export const getStudentDashboard = async (req: AuthRequest, res: ExpressResponse
             faculty: (e.courseId as any).facultyId?.name
         }));
 
-        // Placement Stats
+        
         const placementAttempts = await PlacementPrep.find({ studentId }).sort({ createdAt: -1 }).limit(10);
         const avgScore = placementAttempts.length
             ? Math.round(placementAttempts.reduce((s, a) => s + (a.score / a.total) * 100, 0) / placementAttempts.length)
             : 0;
 
-        // Upcoming Deadlines (Combined Jobs + Assignments)
+        
         const upcomingJobs = await Job.find({
             $or: [{ colleges: req.user!.collegeId }, { colleges: { $size: 0 } }],
             deadline: { $gte: new Date() }
@@ -272,7 +272,7 @@ export const getStudentDashboard = async (req: AuthRequest, res: ExpressResponse
             ...upcomingJobs.map(j => ({ type: 'JOB', title: j.title, deadline: j.deadline }))
         ].sort((a, b) => new Date(a.deadline).getTime() - new Date(b.deadline).getTime()).slice(0, 5);
 
-        // Recent Activity (Attempts + Apps + Enrollments)
+        
         const recentActivity = [
             ...placementAttempts.map(a => ({ type: 'QUIZ', title: a.module, date: (a as any).createdAt, score: a.score })),
             ...(await Application.find({ studentId }).populate('jobId', 'title').sort({ createdAt: -1 }).limit(5)).map(app => ({
@@ -283,7 +283,7 @@ export const getStudentDashboard = async (req: AuthRequest, res: ExpressResponse
             ...enrollments.slice(0, 5).map(e => ({ type: 'ENROLLMENT', title: (e.courseId as any).title, date: (e as any).createdAt }))
         ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 10);
 
-        // User Info (Academic context)
+        
         const studentInfo = await User.findById(studentId).populate('collegeId', 'name');
 
         res.json({

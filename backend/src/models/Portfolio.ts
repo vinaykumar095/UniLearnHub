@@ -2,26 +2,26 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IPortfolio extends Document {
     studentId: mongoose.Types.ObjectId;
-    // Extended personal info
+    
     city?: string;
     state?: string;
     country?: string;
     bio?: string;
-    // Coding / Social profiles
+    
     github?: string;
     linkedin?: string;
     leetcode?: string;
     codechef?: string;
     hackerrank?: string;
     website?: string;
-    // Academic
+    
     branch?: string;
     year?: string;
     cgpa?: string;
     college?: string;
-    // Skills
+    
     skills?: string[];
-    // Projects & Certs
+    
     projects: {
         title: string;
         description?: string;

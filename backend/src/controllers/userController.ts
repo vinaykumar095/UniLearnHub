@@ -12,19 +12,19 @@ export const getUsers = async (req: ExpressRequest, res: ExpressResponse) => {
         const query: any = { status: { $ne: 'deleted' } };
         if (role) query.role = role;
         
-        // Restricted query logic
+        
         const authReq = req as AuthRequest;
         const isAdmin = authReq.user?.role === Role.CENTRAL_ADMIN;
         const isCollegeAdmin = authReq.user?.role === Role.COLLEGE_ADMIN;
 
         if (isCollegeAdmin && authReq.user) {
-            // Extract string ID from collegeId (handle both string and object cases)
+            
             const adminCollegeId = authReq.user.collegeId && typeof authReq.user.collegeId === 'object' && '_id' in authReq.user.collegeId
                 ? (authReq.user.collegeId as any)._id.toString()
                 : authReq.user.collegeId?.toString();
 
             if (role === Role.RECRUITER) {
-                // College Admins can only see APPROVED recruiters
+                
                 query.status = 'active';
                 if (collegeId && collegeId !== 'null' && collegeId !== 'undefined') {
                     query.collegeId = collegeId;
@@ -33,12 +33,12 @@ export const getUsers = async (req: ExpressRequest, res: ExpressResponse) => {
                 query.collegeId = adminCollegeId;
             }
         } else if (!isAdmin) {
-            // Other roles (STUDENT, FACULTY) can only see users from their own college if searching
+            
             if (authReq.user?.collegeId) {
                 query.collegeId = authReq.user.collegeId;
             }
         } else if (collegeId && collegeId !== 'null' && collegeId !== 'undefined') {
-            // Central Admin can filter by any collegeId
+            
             query.collegeId = collegeId;
         }
 

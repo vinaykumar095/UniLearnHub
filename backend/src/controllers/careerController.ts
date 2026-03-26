@@ -25,11 +25,11 @@ export const createRoadmap = async (req: any, res: Response) => {
 
 export const updateRoadmapStep = async (req: Request, res: Response) => {
     try {
-        const { id } = req.params; // Roadmap ID
+        const { id } = req.params; 
         const { milestoneTitle, status } = req.body;
 
-        // Find roadmap and update the specific milestone's status
-        // Since it's nested (stages -> milestones), we use positional operator with caution or find first
+        
+        
         const roadmap = await CareerRoadmap.findOneAndUpdate(
             { _id: id, 'stages.milestones.title': milestoneTitle },
             { $set: { 'stages.$[].milestones.$[m].status': status } },

@@ -103,7 +103,7 @@ const RecruiterJobs = () => {
 
     return (
         <div className="max-w-7xl mx-auto space-y-8 pb-20">
-            {/* Header */}
+            {}
             <div className="flex flex-col md:flex-row md:items-center gap-5 justify-between">
                 <div className="flex items-center gap-5">
                     <div className="p-3 bg-indigo-600 rounded-2xl shadow-lg shadow-indigo-200">
@@ -120,7 +120,7 @@ const RecruiterJobs = () => {
                 </button>
             </div>
 
-            {/* Post Form */}
+            {}
             <AnimatePresence>
                 {showForm && (
                     <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
@@ -133,7 +133,7 @@ const RecruiterJobs = () => {
                         </div>
 
                         <form onSubmit={handleCreate} className="space-y-8">
-                            {/* Basic Info */}
+                            {}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Job Title / Role</label>
@@ -180,7 +180,7 @@ const RecruiterJobs = () => {
                                 </div>
                             </div>
 
-                            {/* Job Type + Work Mode + Salary */}
+                            {}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Job Type</label>
@@ -228,7 +228,7 @@ const RecruiterJobs = () => {
                                 </div>
                             </div>
 
-                            {/* Description & Requirements */}
+                            {}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Job Description</label>
@@ -246,7 +246,7 @@ const RecruiterJobs = () => {
                                 </div>
                             </div>
 
-                            {/* Eligibility */}
+                            {}
                             <div className="bg-slate-50 rounded-2xl p-6 space-y-5">
                                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Eligibility Criteria</p>
                                 <div className="space-y-2">
@@ -288,7 +288,7 @@ const RecruiterJobs = () => {
                                 </div>
                             </div>
 
-                            {/* Job Visibility */}
+                            {}
                             <div className="bg-white rounded-[2.5rem] border-2 border-slate-100 p-8 space-y-6">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 bg-indigo-50 rounded-xl">
@@ -374,7 +374,7 @@ const RecruiterJobs = () => {
                 )}
             </AnimatePresence>
 
-            {/* Search + Filter */}
+            {}
             <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-5 flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -392,7 +392,7 @@ const RecruiterJobs = () => {
                 </div>
             </div>
 
-            {/* Job Grid */}
+            {}
             {filtered.length === 0 ? (
                 <div className="py-24 text-center bg-white rounded-[3rem] border border-dashed border-slate-200">
                     <Briefcase className="w-14 h-14 text-slate-200 mx-auto mb-4" />

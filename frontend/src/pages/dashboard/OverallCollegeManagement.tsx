@@ -95,7 +95,7 @@ const Colleges = () => {
                 />
             </div>
 
-            {/* Pending Colleges Section */}
+            {}
             {pendingColleges.length > 0 && (
                 <div className="space-y-4">
                     <h2 className="text-sm font-black text-amber-600 uppercase tracking-widest flex items-center gap-2">
@@ -148,7 +148,7 @@ const Colleges = () => {
                 </div>
             )}
 
-            {/* Active / Suspended Colleges */}
+            {}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {activeColleges.map((college) => (
                     <motion.div

@@ -13,11 +13,11 @@ const nukeOrphans = async () => {
         await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/unilearnhub');
         console.log('--- Database Cleanup Started ---');
 
-        // 1. Hard delete users marked as 'deleted'
+        
         const deletedUsers = await User.deleteMany({ status: 'deleted' });
         console.log(`- Permanently removed ${deletedUsers.deletedCount} users marked as 'deleted'.`);
 
-        // 2. Identify and remove orphaned Students/Faculty (no valid college)
+        
         const allColleges = await College.find().select('_id');
         const collegeIds = allColleges.map(c => c._id.toString());
         
@@ -27,7 +27,7 @@ const nukeOrphans = async () => {
         });
         console.log(`- Removed ${orphans.deletedCount} orphaned users with invalid college IDs.`);
 
-        // 3. Remove Jobs with no valid Recruiter
+        
         const allRecruiters = await User.find({ role: Role.RECRUITER }).select('_id');
         const recruiterIds = allRecruiters.map(r => r._id.toString());
 
@@ -36,13 +36,13 @@ const nukeOrphans = async () => {
         });
         console.log(`- Removed ${orphanedJobs.deletedCount} orphaned jobs.`);
 
-        // 4. Remove Placement Drives with no valid Recruiter
+        
         const orphanedDrives = await PlacementDrive.deleteMany({
             recruiterId: { $nin: recruiterIds.map(id => new mongoose.Types.ObjectId(id)) }
         });
         console.log(`- Removed ${orphanedDrives.deletedCount} orphaned placement drives.`);
 
-        // 5. Remove Courses with no valid Faculty or College
+        
         const orphanedCourses = await Course.deleteMany({
             $or: [
                 { collegeId: { $nin: collegeIds.map(id => new mongoose.Types.ObjectId(id)) } },

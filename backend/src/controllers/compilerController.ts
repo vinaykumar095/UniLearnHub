@@ -42,7 +42,7 @@ export const runCode = async (req: Request, res: Response) => {
                     }
 
                     exec(executeCommand, { timeout: 5000 }, (runError, runStdout, runStderr) => {
-                        // Cleanup
+                        
                         try {
                             if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
                             if (fs.existsSync(exePath)) fs.unlinkSync(exePath);
@@ -63,11 +63,11 @@ export const runCode = async (req: Request, res: Response) => {
             case 'java':
                 fileName = `Main_${fileId}.java`;
                 const javaPath = path.join(tempDir, fileName);
-                // Simple Main class wrapper if user didn't provide one, but we assume they provide full class for professional use
+                
                 fs.writeFileSync(javaPath, code);
                 
                 command = `javac "${javaPath}"`;
-                // Java needs the class name, we find it or assume Main if not specified
+                
                 const classMatch = code.match(/class\s+(\w+)/);
                 const className = classMatch ? classMatch[1] : 'Main';
                 executeCommand = `java -cp "${tempDir}" ${className}`;
@@ -82,7 +82,7 @@ export const runCode = async (req: Request, res: Response) => {
                     }
 
                     exec(executeCommand, { timeout: 5000 }, (runError, runStdout, runStderr) => {
-                        // Cleanup .class files
+                        
                         try {
                             if (fs.existsSync(javaPath)) fs.unlinkSync(javaPath);
                             const classFile = path.join(tempDir, `${className}.class`);
@@ -121,7 +121,7 @@ export const runCode = async (req: Request, res: Response) => {
 
         if (command) {
             exec(command, { timeout: 5000 }, (error, stdout, stderr) => {
-                // Cleanup
+                
                 const filePath = path.join(tempDir, fileName);
                 try {
                     if (fs.existsSync(filePath)) fs.unlinkSync(filePath);

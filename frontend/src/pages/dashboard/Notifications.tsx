@@ -8,7 +8,7 @@ import {
 import api from '../../api/client';
 import { useAuth } from '../../context/AuthContext';
 
-// ─── Smart icon + category mapping ───────────────────────────────────────────
+
 
 type NotiCategory = 'ENROLLMENT' | 'ACTIVITY' | 'ADMIN' | 'PLACEMENT' | 'COURSE' | 'REGISTRATION' | 'GENERAL' | 'APPLICATION';
 
@@ -46,7 +46,7 @@ const FILTERS: { id: string; label: string }[] = [
     { id: 'COURSE', label: 'Courses' },
 ];
 
-// ─── Component ────────────────────────────────────────────────────────────────
+
 
 const Notifications = () => {
     const { user } = useAuth();
@@ -80,7 +80,7 @@ const Notifications = () => {
             await api.patch('/notifications/read-all');
             setNotifications(prev => prev.map(n => ({ ...n, read: true })));
         } catch (e) {
-            // fallback — mark one by one
+            
             const unread = notifications.filter(n => !n.read);
             await Promise.all(unread.map(n => api.patch(`/notifications/${n._id}/read`).catch(() => { })));
             setNotifications(prev => prev.map(n => ({ ...n, read: true })));
@@ -98,7 +98,7 @@ const Notifications = () => {
 
     const filtered = filter === 'ALL' ? enriched : enriched.filter(n => n._cat === filter);
 
-    // Faculty stat counts
+    
     const catCounts = Object.keys(CAT_META).reduce((acc, key) => {
         acc[key] = enriched.filter(n => n._cat === key).length;
         return acc;
@@ -107,7 +107,7 @@ const Notifications = () => {
     return (
         <div className="max-w-5xl mx-auto space-y-8 pb-20">
 
-            {/* ── Header ── */}
+            {}
             <div className="flex flex-col md:flex-row md:items-center gap-5 justify-between">
                 <div className="flex items-center gap-5">
                     <div className="relative">
@@ -137,7 +137,7 @@ const Notifications = () => {
                 )}
             </div>
 
-            {/* ── Faculty Stats Strip ── */}
+            {}
             {isFaculty && notifications.length > 0 && (
                 <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
                     {(Object.keys(CAT_META) as NotiCategory[]).map((key) => {
@@ -158,7 +158,7 @@ const Notifications = () => {
                 </div>
             )}
 
-            {/* ── Filter Tabs (Faculty) ── */}
+            {}
             {isFaculty && (
                 <div className="flex items-center gap-2 flex-wrap">
                     <Filter className="w-4 h-4 text-slate-400 shrink-0" />
@@ -176,7 +176,7 @@ const Notifications = () => {
                 </div>
             )}
 
-            {/* ── Empty State ── */}
+            {}
             {filtered.length === 0 && (
                 <div className="text-center py-28 bg-white rounded-[3rem] border border-dashed border-slate-200">
                     <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-5">
@@ -193,11 +193,11 @@ const Notifications = () => {
                 </div>
             )}
 
-            {/* ── Notification List ── */}
+            {}
             <AnimatePresence>
                 {filtered.length > 0 && (
                     <motion.div key={filter} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-3">
-                        {/* Unread section */}
+                        {}
                         {filtered.some(n => !n.read) && (
                             <div className="space-y-3">
                                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-2 flex items-center gap-2">
@@ -209,7 +209,7 @@ const Notifications = () => {
                             </div>
                         )}
 
-                        {/* Read section */}
+                        {}
                         {filtered.some(n => n.read) && (
                             <div className="space-y-3 mt-6">
                                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-2 flex items-center gap-2">
@@ -224,7 +224,7 @@ const Notifications = () => {
                 )}
             </AnimatePresence>
 
-            {/* ── Faculty Tip Banner ── */}
+            {}
             {isFaculty && notifications.length === 0 && !loading && (
                 <div className="flex items-start gap-4 bg-indigo-50 border border-indigo-100 rounded-2xl p-5">
                     <LayoutGrid className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
@@ -238,7 +238,7 @@ const Notifications = () => {
     );
 };
 
-// ─── Notification Card ────────────────────────────────────────────────────────
+
 
 const NotificationCard = ({ n, i, onMarkRead, isFaculty }: {
     n: any; i: number; onMarkRead: (id: string) => void; isFaculty: boolean;
@@ -256,13 +256,13 @@ const NotificationCard = ({ n, i, onMarkRead, isFaculty }: {
             className={`bg-white rounded-2xl border shadow-sm px-5 py-4 flex items-start gap-4 cursor-pointer hover:shadow-md transition-all group ${!n.read ? meta.unreadClass : 'border-slate-100'
                 }`}
         >
-            {/* Icon */}
+            {}
             <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110 ${!n.read ? meta.iconBg : 'bg-slate-100 text-slate-400'
                 }`}>
                 <Icon className="w-5 h-5" />
             </div>
 
-            {/* Content */}
+            {}
             <div className="flex-1 min-w-0">
                 {isFaculty && (
                     <span className={`inline-block px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest mb-2 ${!n.read ? meta.iconBg : 'bg-slate-100 text-slate-400'
@@ -279,12 +279,12 @@ const NotificationCard = ({ n, i, onMarkRead, isFaculty }: {
                 </p>
             </div>
 
-            {/* Unread dot */}
+            {}
             {!n.read && (
                 <div className={`w-2.5 h-2.5 ${meta.dotColor} rounded-full flex-shrink-0 mt-2 animate-pulse`} />
             )}
 
-            {/* Read indicator */}
+            {}
             {n.read && (
                 <CheckCircle2 className="w-4 h-4 text-slate-200 flex-shrink-0 mt-2" />
             )}

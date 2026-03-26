@@ -37,7 +37,7 @@ const Sidebar = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => void }) =>
     };
 
     const menuItems = user?.role === 'RECRUITER' ? [
-        // ── Recruiter: exactly 8 items ──
+        
         { title: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
         { title: 'My Profile', icon: UserCircle, path: '/dashboard/recruiter/profile' },
         { title: 'Post Jobs', icon: Briefcase, path: '/dashboard/recruiter/jobs' },
@@ -47,7 +47,7 @@ const Sidebar = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => void }) =>
         { title: 'Announcements', icon: Megaphone, path: '/dashboard/recruiter/announcements' },
         { title: 'Settings', icon: Settings, path: '/dashboard/settings' },
     ] : user?.role === 'COLLEGE_ADMIN' ? [
-        // ── College Admin: exactly 9 items ──
+        
         { title: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
         { title: 'My Profile', icon: UserCircle, path: '/dashboard/college/profile' },
         { title: 'Student Management', icon: Users, path: '/dashboard/college/students' },
@@ -60,7 +60,7 @@ const Sidebar = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => void }) =>
         { title: 'Reports & Analytics', icon: BarChart3, path: '/dashboard/college/reports' },
         { title: 'Settings', icon: Settings, path: '/dashboard/settings' },
     ] : user?.role === 'CENTRAL_ADMIN' ? [
-        // ── Overall Admin (Central): exactly 8 items ──
+        
         { title: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
         { title: 'My Profile', icon: UserCircle, path: '/dashboard/admin/profile' },
         { title: 'College Management', icon: GraduationCap, path: '/dashboard/admin/colleges' },
@@ -71,7 +71,7 @@ const Sidebar = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => void }) =>
         { title: 'Broadcast Hub', icon: Megaphone, path: '/dashboard/admin/notifications' },
         { title: 'Settings', icon: Settings, path: '/dashboard/settings' },
     ] : [
-        // ── All other roles ──
+        
         { title: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
         ...(user?.role === 'FACULTY' ? [
             { title: 'My Profile', icon: UserCircle, path: '/dashboard/faculty/profile' },
@@ -166,7 +166,7 @@ const DashboardLayout = () => {
             }
         };
         fetchUnread();
-        const interval = setInterval(fetchUnread, 30000); // 30s pulse
+        const interval = setInterval(fetchUnread, 30000); 
         return () => clearInterval(interval);
     }, [user]);
 

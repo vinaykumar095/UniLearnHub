@@ -6,7 +6,7 @@ export const recordSubmission = async (req: any, res: Response) => {
         const { problemId, status } = req.body;
         const studentId = req.user.id;
 
-        // Upsert: Create if doesn't exist, otherwise update (though index is unique)
+        
         const submission = await DSASubmission.findOneAndUpdate(
             { studentId, problemId },
             { studentId, problemId, status: status || 'solved', completedAt: new Date() },
