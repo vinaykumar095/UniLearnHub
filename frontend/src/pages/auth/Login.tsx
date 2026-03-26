@@ -18,7 +18,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [stats, setStats] = useState({ colleges: '100+', students: '50k+', recruiters: '1k+' });
+    const [stats, setStats] = useState({ colleges: '...', students: '...', recruiters: '...' });
     const navigate = useNavigate();
     const { login } = useAuth();
 
