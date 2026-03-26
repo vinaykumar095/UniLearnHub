@@ -60,12 +60,12 @@ const getStarterCode = (problem: DSAProblem | undefined, langId: string) => {
             return `class Solution:\n    def ${funcName}(self, ${paramStr}):\n        # Write your code here\n        pass`;
         case 'cpp':
             const returnType = problem?.title?.toLowerCase().includes('sum') || problem?.title?.toLowerCase().includes('factorial') ? 'long long' : 'int';
-            return `class Solution {\npublic:\n    ${returnType} ${funcName}(${cppParamStr}) {\n        
+            return `class Solution {\npublic:\n    ${returnType} ${funcName}(${cppParamStr}) {\n        \n    }\n};`;
         case 'java':
             const jReturnType = problem?.title?.toLowerCase().includes('sum') || problem?.title?.toLowerCase().includes('factorial') ? 'long' : 'int';
-            return `class Solution {\n    public ${jReturnType} ${funcName}(${javaParamStr}) {\n        
+            return `class Solution {\n    public ${jReturnType} ${funcName}(${javaParamStr}) {\n        \n    }\n}`;
         case 'javascript':
-            return `\nvar ${funcName} = function(${paramStr}) {\n    
+            return `\nvar ${funcName} = function(${paramStr}) {\n    \n};`;
         default:
             const lang = LANGUAGES.find(l => l.id === langId);
             return lang?.default || "";
