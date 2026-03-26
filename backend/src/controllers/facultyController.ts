@@ -135,9 +135,11 @@ export const provideGuidance = async (req: AuthRequest, res: ExpressResponse) =>
         else message = `Faculty Guidance: ${content}`;
 
         if (isBroadcast || !studentId) {
-            // Find all users with role 'student' (case-insensitive check)
+            // Find students belonging to the same college as the faculty
+            const collegeId = (req as any).user.collegeId;
             const students = await User.find({ 
-                role: { $regex: /^student$/i } 
+                role: { $regex: /^student$/i },
+                collegeId: collegeId
             }).distinct('_id');
             
             for (const sid of students) {

@@ -9,9 +9,10 @@ interface User {
     name: string;
     email: string;
     role: string;
-    collegeId?: {
+    college?: {
         name: string;
     };
+    company?: string;
     status?: string;
 }
 
@@ -130,7 +131,9 @@ const Users = () => {
                                         {user.role}
                                     </span>
                                 </td>
-                                 <td className="px-6 py-4 text-slate-500 text-sm font-medium">{user.collegeId?.name || 'Platform'}</td>
+                                <td className="px-6 py-4 text-slate-500 text-sm font-medium">
+                                    {user.role === 'RECRUITER' ? (user.company || 'Direct') : (user.college?.name || 'Platform')}
+                                </td>
                                 <td className="px-6 py-4">
                                     <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
                                         user.status === 'pending' ? 'bg-amber-50 text-amber-600 border border-amber-100' :
