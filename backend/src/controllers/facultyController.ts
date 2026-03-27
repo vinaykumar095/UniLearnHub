@@ -2,7 +2,7 @@ import { Request as ExpressRequest, Response as ExpressResponse } from 'express'
 import Course from '../models/Course';
 import Enrollment from '../models/Enrollment';
 import Submission from '../models/Submission';
-import User from '../models/User';
+import User, { Role } from '../models/User';
 import Assignment from '../models/Assignment';
 import Notification from '../models/Notification';
 import { AuthRequest } from '../middlewares/auth';
