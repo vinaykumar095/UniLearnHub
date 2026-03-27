@@ -89,33 +89,52 @@ import Guidance from '../models/Guidance';
 export const getStudentProgress = async (req: AuthRequest, res: ExpressResponse) => {
     try {
         const facultyId = req.user!.id;
+        const collegeId = (req as any).user.collegeId;
+
+        if (!collegeId) {
+            return res.status(400).json({ message: 'Faculty not linked to a college' });
+        }
+
+        
         const facultyCourses = await Course.find({ facultyId });
         const courseIds = facultyCourses.map(c => c._id);
 
-        const enrollments = await Enrollment.find({ courseId: { $in: courseIds } })
-            .populate('studentId', 'name email branch year skills projects bio experience github linkedin leetcode')
-            .populate('courseId', 'title');
+        
+        const collegeStudents = await User.find({ 
+            collegeId, 
+            role: Role.STUDENT 
+        }).select('name email branch year skills projects bio github linkedin leetcode');
 
-        const studentData = enrollments.map(e => ({
-            id: e._id,
-            studentId: (e.studentId as any)?._id,
-            studentName: (e.studentId as any)?.name,
-            studentEmail: (e.studentId as any)?.email,
-            studentBio: (e.studentId as any)?.bio,
-            courseTitle: (e.courseId as any)?.title,
-            progress: e.progress,
-            milestones: (e as any).milestones || [],
-            skills: (e.studentId as any)?.skills || [],
-            projects: (e.studentId as any)?.projects || [],
-            experience: (e.studentId as any)?.experience,
-            branch: (e.studentId as any)?.branch,
-            year: (e.studentId as any)?.year,
-            socials: {
-                github: (e.studentId as any)?.github,
-                linkedin: (e.studentId as any)?.linkedin,
-                leetcode: (e.studentId as any)?.leetcode
-            }
-        }));
+        
+        const enrollments = await Enrollment.find({ 
+            studentId: { $in: collegeStudents.map(s => s._id) },
+            courseId: { $in: courseIds }
+        }).populate('courseId', 'title');
+
+        
+        const studentData = collegeStudents.map(student => {
+            const enrollment = enrollments.find(e => e.studentId.toString() === student._id.toString());
+            
+            return {
+                id: student._id,
+                studentId: student._id,
+                studentName: student.name,
+                studentEmail: student.email,
+                studentBio: student.bio,
+                courseTitle: enrollment ? (enrollment.courseId as any)?.title : 'No Active Course',
+                progress: enrollment ? enrollment.progress : 0,
+                milestones: enrollment ? (enrollment as any).milestones || [] : [],
+                skills: student.skills || [],
+                projects: student.projects || [],
+                branch: student.branch || 'N/A',
+                year: student.year || 'N/A',
+                socials: {
+                    github: student.github,
+                    linkedin: student.linkedin,
+                    leetcode: student.leetcode
+                }
+            };
+        });
 
         res.json(studentData);
     } catch (error) {
