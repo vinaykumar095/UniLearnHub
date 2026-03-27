@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const placementController_1 = require("../controllers/placementController");
+const auth_1 = require("../middlewares/auth");
+const router = (0, express_1.Router)();
+router.get('/progress', auth_1.protect, placementController_1.getPlacementProgress);
+router.post('/attempt', auth_1.protect, placementController_1.submitAttempt);
+router.post('/status/toggle', auth_1.protect, placementController_1.toggleAptitudeStatus);
+router.get('/status', auth_1.protect, placementController_1.getAptitudeStatus);
+exports.default = router;

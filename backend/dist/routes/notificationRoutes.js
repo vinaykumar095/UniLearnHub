@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const notificationController_1 = require("../controllers/notificationController");
+const auth_1 = require("../middlewares/auth");
+const User_1 = require("../models/User");
+const router = (0, express_1.Router)();
+router.get('/', auth_1.protect, notificationController_1.getNotifications);
+router.patch('/read-all', auth_1.protect, notificationController_1.markAllAsRead);
+router.patch('/:id/read', auth_1.protect, notificationController_1.markAsRead);
+router.post('/broadcast', auth_1.protect, (0, auth_1.authorize)(User_1.Role.FACULTY, User_1.Role.RECRUITER), notificationController_1.broadcastAnnouncement);
+router.post('/admin-broadcast', auth_1.protect, (0, auth_1.authorize)(User_1.Role.CENTRAL_ADMIN), notificationController_1.adminBroadcast);
+exports.default = router;

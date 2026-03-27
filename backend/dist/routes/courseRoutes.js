@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const courseController_1 = require("../controllers/courseController");
+const auth_1 = require("../middlewares/auth");
+const User_1 = require("../models/User");
+const router = (0, express_1.Router)();
+router.post('/', auth_1.protect, (0, auth_1.authorize)(User_1.Role.CENTRAL_ADMIN, User_1.Role.COLLEGE_ADMIN, User_1.Role.FACULTY), courseController_1.createCourse);
+router.get('/', auth_1.protect, courseController_1.getCourses);
+router.get('/faculty', auth_1.protect, (0, auth_1.authorize)(User_1.Role.FACULTY), courseController_1.getFacultyCourses);
+router.get('/enrolled', auth_1.protect, (0, auth_1.authorize)(User_1.Role.STUDENT), courseController_1.getEnrolledCourses);
+router.post('/enroll', auth_1.protect, (0, auth_1.authorize)(User_1.Role.STUDENT), courseController_1.enrollInCourse);
+router.get('/:id', auth_1.protect, courseController_1.getCourseById);
+router.patch('/:id/approve', auth_1.protect, (0, auth_1.authorize)(User_1.Role.COLLEGE_ADMIN, User_1.Role.CENTRAL_ADMIN), courseController_1.approveCourse);
+router.put('/:id', auth_1.protect, (0, auth_1.authorize)(User_1.Role.FACULTY), courseController_1.updateCourse);
+exports.default = router;

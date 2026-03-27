@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const collegeController_1 = require("../controllers/collegeController");
+const auth_1 = require("../middlewares/auth");
+const User_1 = require("../models/User");
+const router = (0, express_1.Router)();
+router.post('/register', collegeController_1.registerCollege);
+router.get('/public-stats', collegeController_1.getPlatformStats);
+router.post('/', auth_1.protect, (0, auth_1.authorize)(User_1.Role.CENTRAL_ADMIN), collegeController_1.createCollege);
+router.get('/', collegeController_1.getColleges);
+router.get('/:id', auth_1.protect, (0, auth_1.authorize)(User_1.Role.CENTRAL_ADMIN), collegeController_1.getCollegeById);
+router.get('/stats', auth_1.protect, (0, auth_1.authorize)(User_1.Role.CENTRAL_ADMIN), collegeController_1.getCollegeStats);
+router.put('/:id', auth_1.protect, (0, auth_1.authorize)(User_1.Role.CENTRAL_ADMIN, User_1.Role.COLLEGE_ADMIN), collegeController_1.updateCollege);
+router.patch('/:id/status', auth_1.protect, (0, auth_1.authorize)(User_1.Role.CENTRAL_ADMIN), collegeController_1.updateCollegeStatus);
+router.patch('/:id/approve', auth_1.protect, (0, auth_1.authorize)(User_1.Role.CENTRAL_ADMIN), collegeController_1.approveCollege);
+router.delete('/:id', auth_1.protect, (0, auth_1.authorize)(User_1.Role.CENTRAL_ADMIN), collegeController_1.deleteCollege);
+exports.default = router;

@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const jobController_1 = require("../controllers/jobController");
+const auth_1 = require("../middlewares/auth");
+const User_1 = require("../models/User");
+const router = (0, express_1.Router)();
+router.post('/', auth_1.protect, (0, auth_1.authorize)(User_1.Role.RECRUITER), jobController_1.createJob);
+router.get('/', auth_1.protect, jobController_1.getJobs);
+router.get('/recruiter', auth_1.protect, (0, auth_1.authorize)(User_1.Role.RECRUITER), jobController_1.getRecruiterJobs);
+router.get('/college/applications', auth_1.protect, (0, auth_1.authorize)(User_1.Role.COLLEGE_ADMIN), jobController_1.getCollegeApplications);
+router.get('/:jobId/applicants', auth_1.protect, (0, auth_1.authorize)(User_1.Role.RECRUITER), jobController_1.getJobApplicants);
+router.post('/apply', auth_1.protect, (0, auth_1.authorize)(User_1.Role.STUDENT), jobController_1.applyForJob);
+router.get('/student/applications', auth_1.protect, (0, auth_1.authorize)(User_1.Role.STUDENT), jobController_1.getStudentApplications);
+router.get('/student/dashboard', auth_1.protect, (0, auth_1.authorize)(User_1.Role.STUDENT), jobController_1.getStudentDashboard);
+router.patch('/applications/:id/status', auth_1.protect, (0, auth_1.authorize)(User_1.Role.RECRUITER), jobController_1.updateApplicationStatus);
+exports.default = router;

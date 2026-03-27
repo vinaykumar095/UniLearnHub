@@ -1,0 +1,24 @@
+[getUsers] 2026-03-26T13:42:11.854Z
+Params: {"role":"RECRUITER"}
+Auth: {"id":"69bf764cd526a7da9e0fe691","role":"CENTRAL_ADMIN"}
+Query: {"status":{"$ne":"deleted"},"role":"RECRUITER"}
+Found: 1
+-------------------
+[getUsers] 2026-03-26T13:42:11.908Z
+Params: {"role":"RECRUITER"}
+Auth: {"id":"69bf764cd526a7da9e0fe691","role":"CENTRAL_ADMIN"}
+Query: {"status":{"$ne":"deleted"},"role":"RECRUITER"}
+Found: 1
+-------------------
+[getUsers] 2026-03-26T13:42:13.161Z
+Params: {}
+Auth: {"id":"69bf764cd526a7da9e0fe691","role":"CENTRAL_ADMIN"}
+Query: {"status":{"$ne":"deleted"}}
+Found: 12
+-------------------
+[getUsers] 2026-03-26T13:42:13.240Z
+Params: {}
+Auth: {"id":"69bf764cd526a7da9e0fe691","role":"CENTRAL_ADMIN"}
+Query: {"status":{"$ne":"deleted"}}
+Found: 12
+-------------------

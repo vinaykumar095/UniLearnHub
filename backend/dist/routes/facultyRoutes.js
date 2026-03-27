@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const facultyController_1 = require("../controllers/facultyController");
+const auth_1 = require("../middlewares/auth");
+const User_1 = require("../models/User");
+const router = (0, express_1.Router)();
+router.get('/dashboard', auth_1.protect, (0, auth_1.authorize)(User_1.Role.FACULTY), facultyController_1.getFacultyDashboard);
+router.get('/students', auth_1.protect, (0, auth_1.authorize)(User_1.Role.FACULTY), facultyController_1.getStudentProgress);
+router.get('/courses/:id/students', auth_1.protect, (0, auth_1.authorize)(User_1.Role.FACULTY), facultyController_1.getCourseStudents);
+router.patch('/courses/:id/materials', auth_1.protect, (0, auth_1.authorize)(User_1.Role.FACULTY), facultyController_1.updateCourseMaterials);
+router.post('/guidance', auth_1.protect, (0, auth_1.authorize)(User_1.Role.FACULTY), facultyController_1.provideGuidance);
+router.get('/guidance', auth_1.protect, (0, auth_1.authorize)(User_1.Role.FACULTY), facultyController_1.getGuidanceHistory);
+exports.default = router;

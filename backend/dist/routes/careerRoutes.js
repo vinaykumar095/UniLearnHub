@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const careerController_1 = require("../controllers/careerController");
+const auth_1 = require("../middlewares/auth");
+const router = (0, express_1.Router)();
+router.get('/guidance', auth_1.protect, careerController_1.getStudentGuidance);
+router.get('/roadmap', auth_1.protect, careerController_1.getRoadmap);
+router.post('/roadmap', auth_1.protect, careerController_1.createRoadmap);
+router.put('/roadmap/:id/step', auth_1.protect, careerController_1.updateRoadmapStep);
+router.patch('/roadmap/:id/step', auth_1.protect, careerController_1.updateRoadmapStep);
+router.delete('/roadmap/:id', auth_1.protect, careerController_1.deleteRoadmap);
+exports.default = router;
